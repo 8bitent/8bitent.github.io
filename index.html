@@ -86,10 +86,17 @@
     <p>Independent record label exploring sound, style, and creativity without limits.</p>
     <div class="links">
       <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
-      <a href="https://spotify.com" target="_blank" rel="noopener">Spotify</a>
-      <a href="mailto:eightbit.ent@gmail.com">Contact</a>
+      <a id="contact-link">Contact</a>
     </div>
+    <div id="email">contact@8bitentertainment.com</div>
   </div>
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
+  <script>
+    const contactLink = document.getElementById('contact-link');
+    const emailDiv = document.getElementById('email');
+    contactLink.addEventListener('click', () => {
+      emailDiv.style.display = emailDiv.style.display === 'none' || emailDiv.style.display === '' ? 'block' : 'none';
+    });
+  </script>
 </body>
 </html>
