@@ -13,6 +13,8 @@
       --accent1:#1a1a40;
       --accent2:#3b1c70;
       --accent3:#1b1b2f;
+      --gamey-hover:#3b1c70; /* Dark bluish hover */
+      --gamey-glow:0 0 12px #3b1c70, 0 0 24px #3b1c70;
     }
     html,body{
       height:100%;
@@ -24,6 +26,7 @@
       color:var(--fg);
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
@@ -32,6 +35,37 @@
       padding:0;
       overflow:hidden;
     }
+
+    /* Top border and artist button container */
+    .top-bar {
+      width:100%;
+      border-bottom:4px solid var(--accent2);
+      display:flex;
+      justify-content:flex-end;
+      padding:0.75rem 2rem;
+      box-sizing:border-box;
+      position:absolute;
+      top:0;
+      background:rgba(0,0,0,0.25);
+      z-index:10;
+    }
+    .top-bar a {
+      color:var(--fg);
+      text-decoration:none;
+      font-weight:bold;
+      border:2px solid var(--fg);
+      padding:0.5rem 1rem;
+      border-radius:5px;
+      transition:all 0.2s ease;
+      background:rgba(0,0,0,0.2);
+    }
+    .top-bar a:hover {
+      color:var(--bg);
+      background:var(--gamey-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--gamey-glow);
+    }
+
     .card{
       max-width:760px;
       width:100%;
@@ -41,6 +75,7 @@
       padding:2rem;
       position:relative;
       animation: float 6s ease-in-out infinite;
+      z-index:5;
     }
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -77,12 +112,19 @@
       text-decoration:none;
       margin:0 .75rem;
       opacity:.8;
-      transition:opacity .2s, text-shadow .2s;
+      transition:all 0.2s ease;
       cursor:pointer;
+      font-weight:bold;
+      border:2px solid var(--fg);
+      padding:0.5rem 1rem;
+      border-radius:5px;
+      display:inline-block;
     }
     .links a:hover{
-      opacity:1;
-      text-shadow:0 0 8px #6a0dad;
+      color:var(--bg);
+      background:var(--gamey-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--gamey-glow);
     }
     #email{
       position:absolute;
@@ -110,25 +152,19 @@
 
     /* Mobile responsiveness */
     @media (max-width: 480px) {
-      img.logo {
-        width:200px;
-      }
-      .card {
-        padding:1rem;
-      }
-      h1 {
-        font-size:clamp(22px,8vw,32px);
-      }
-      p {
-        font-size:clamp(12px,4vw,16px);
-      }
-      .links a {
-        margin:0 .5rem;
-      }
+      img.logo { width:200px; }
+      .card { padding:1rem; }
+      h1 { font-size:clamp(22px,8vw,32px); }
+      p { font-size:clamp(12px,4vw,16px); }
+      .links a { margin:0 .5rem; }
+      .top-bar a { padding:0.4rem 0.8rem; font-size:0.9rem; }
     }
   </style>
 </head>
 <body>
+  <div class="top-bar">
+    <a id="artists-top" href="artists.html">Artists</a>
+  </div>
   <div class="card" role="main">
     <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
     <h1>8 Bit Entertainment</h1>
@@ -136,6 +172,7 @@
     <div class="links">
       <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
       <a id="contact-link">Contact</a>
+      <a id="artists-link" href="artists.html">Artists</a>
     </div>
     <div id="email">eightbit.ent@gmail.com</div>
   </div>
