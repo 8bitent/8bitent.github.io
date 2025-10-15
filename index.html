@@ -51,10 +51,10 @@
       border-bottom:4px solid var(--accent2);
       display:flex;
       justify-content:flex-end;
-      padding:0.75rem 2rem;
+      padding:1.25rem 2rem; /* increased padding for bigger button */
       box-sizing:border-box;
       position:fixed;
-      top:0;
+      top:20px; /* lowered top bar */
       left:0;
       background:rgba(0,0,0,0.25);
       z-index:10;
@@ -64,8 +64,9 @@
       text-decoration:none;
       font-weight:bold;
       border:2px solid var(--fg);
-      padding:0.5rem 1rem;
+      padding:0.75rem 1.5rem; /* bigger button */
       border-radius:5px;
+      font-size:1.2rem; /* larger font */
       transition:all 0.2s ease;
       background:rgba(0,0,0,0.2);
     }
@@ -86,7 +87,7 @@
       position:relative;
       animation: float 6s ease-in-out infinite;
       z-index:5;
-      margin-top:120px; /* below top-bar */
+      margin-top:160px; /* adjusted for lower top-bar */
     }
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -97,7 +98,7 @@
       width:350px;
       height:auto;
       margin-bottom:10px;
-      transform: translateX(15px); /* shifts it 10px to the right without breaking layout */
+      transform: translateX(15px); /* nudged right */
       filter:drop-shadow(0 0 12px #3b1c70);
       animation: logo-float 4s ease-in-out infinite;
     }
@@ -165,11 +166,11 @@
 
     @media (max-width: 480px) {
       img.logo { width:200px; }
-      .card { padding:1rem; margin-top:100px; }
+      .card { padding:1rem; margin-top:140px; }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
       .links a { margin:0 .5rem; }
-      .top-bar a { padding:0.4rem 0.8rem; font-size:0.9rem; }
+      .top-bar a { padding:0.6rem 1.2rem; font-size:1rem; }
     }
   </style>
 </head>
