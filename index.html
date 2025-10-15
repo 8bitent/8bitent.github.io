@@ -42,11 +42,8 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    #page-wrapper.exit {
-      opacity:0;
-      transform: scale(0.95) translateY(0);
+      position:relative;
+      min-height:100vh;
     }
 
     .top-bar {
@@ -58,6 +55,7 @@
       box-sizing:border-box;
       position:fixed;
       top:0;
+      left:0;
       background:rgba(0,0,0,0.25);
       z-index:10;
     }
@@ -88,7 +86,7 @@
       position:relative;
       animation: float 6s ease-in-out infinite;
       z-index:5;
-      margin:0 auto;
+      margin-top:120px; /* below top-bar */
     }
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -157,6 +155,7 @@
     footer{
       position:absolute;
       bottom:1rem;
+      left:0;
       width:100%;
       text-align:center;
       font-size:12px;
@@ -165,7 +164,7 @@
 
     @media (max-width: 480px) {
       img.logo { width:200px; }
-      .card { padding:1rem; }
+      .card { padding:1rem; margin-top:100px; }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
       .links a { margin:0 .5rem; }
@@ -199,15 +198,15 @@
         emailDiv.classList.toggle('visible');
       });
 
-      // Smooth Artists page transition with delay to prevent top-bar jump
+      // Smooth Artists page transition without top-bar jump
       document.querySelectorAll('#artists-top, #artists-link').forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
           const href = this.href;
-          const wrapper = document.getElementById('page-wrapper');
-          // Disable pointer events on top-bar to prevent layout shift during transition
-          document.querySelector('.top-bar').style.pointerEvents = 'none';
-          wrapper.classList.add('exit');
+          const card = document.querySelector('.card');
+          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+          card.style.opacity = 0;
+          card.style.transform = 'scale(0.95)';
           setTimeout(() => { window.location.href = href; }, 600);
         });
       });
