@@ -154,10 +154,17 @@
 
     @media (max-width: 480px) {
       img.logo { width:200px; }
+       body {
+        overflow:auto; /* allow scrolling so footer is visible */
+      }
+      footer {
+        position:relative; /* push footer below the card */
+        margin-top:1rem;
+      }
       .card { 
         padding:1rem; 
-        margin-top:300px; 
-        min-height:100px; /* enough height for logo + h1 + p + 3 buttons stacked */
+        margin-top:160px; 
+        min-height:650px; /* enough height for logo + h1 + p + 3 buttons stacked */
       }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
