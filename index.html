@@ -51,10 +51,10 @@
       border-bottom:4px solid var(--accent2);
       display:flex;
       justify-content:flex-end;
-      padding:1.25rem 2rem; /* increased padding for bigger button */
+      padding:1.25rem 2rem;
       box-sizing:border-box;
       position:fixed;
-      top:20px; /* lowered top bar */
+      top:20px;
       left:0;
       background:rgba(0,0,0,0.25);
       z-index:10;
@@ -64,9 +64,9 @@
       text-decoration:none;
       font-weight:bold;
       border:2px solid var(--fg);
-      padding:0.75rem 1.5rem; /* bigger button */
+      padding:0.75rem 1.5rem;
       border-radius:5px;
-      font-size:1.2rem; /* larger font */
+      font-size:1.2rem;
       transition:all 0.2s ease;
       background:rgba(0,0,0,0.2);
     }
@@ -87,7 +87,7 @@
       position:relative;
       animation: float 6s ease-in-out infinite;
       z-index:5;
-      margin-top:160px; /* adjusted for lower top-bar */
+      margin-top:160px;
     }
     @keyframes float {
       0% { transform: translateY(0px); }
@@ -98,7 +98,7 @@
       width:350px;
       height:auto;
       margin-bottom:10px;
-      transform: translateX(15px); /* nudged right */
+      transform: translateX(15px);
       filter:drop-shadow(0 0 12px #3b1c70);
       animation: logo-float 4s ease-in-out infinite;
     }
@@ -169,7 +169,12 @@
       .card { padding:1rem; margin-top:140px; }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
-      .links a { margin:0 .5rem; }
+      .links {
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+      .links a { margin:0.5rem 0; }
       .top-bar a { padding:0.6rem 1.2rem; font-size:1rem; }
     }
   </style>
@@ -200,7 +205,6 @@
         emailDiv.classList.toggle('visible');
       });
 
-      // Smooth Artists page transition without top-bar jump
       document.querySelectorAll('#artists-top, #artists-link').forEach(link => {
         link.addEventListener('click', function(e) {
           e.preventDefault();
