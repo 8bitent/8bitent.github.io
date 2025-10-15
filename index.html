@@ -64,10 +64,17 @@
       margin:0 .75rem;
       opacity:.8;
       transition:opacity .2s, text-shadow .2s;
+      cursor:pointer;
     }
     .links a:hover{
       opacity:1;
       text-shadow:0 0 8px #6a0dad;
+    }
+    #email{
+      margin-top:1rem;
+      color:var(--fg);
+      display:none;
+      font-size:clamp(14px,2.5vw,18px);
     }
     footer{
       position:absolute;
@@ -88,14 +95,21 @@
       <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
       <a id="contact-link">Contact</a>
     </div>
-    <div id="email">contact@8bitentertainment.com</div>
+    <div id="email" style="display:none;">eightbit.ent@gmail.com</div>
   </div>
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
   <script>
-    const contactLink = document.getElementById('contact-link');
-    const emailDiv = document.getElementById('email');
-    contactLink.addEventListener('click', () => {
-      emailDiv.style.display = emailDiv.style.display === 'none' || emailDiv.style.display === '' ? 'block' : 'none';
+    window.addEventListener('DOMContentLoaded', () => {
+      const contactLink = document.getElementById('contact-link');
+      const emailDiv = document.getElementById('email');
+      emailDiv.style.display = 'none'; // ensure hidden on load
+      contactLink.addEventListener('click', () => {
+        if (emailDiv.style.display === 'none') {
+          emailDiv.style.display = 'block';
+        } else {
+          emailDiv.style.display = 'none';
+        }
+      });
     });
   </script>
 </body>
