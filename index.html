@@ -6,7 +6,6 @@
   <title>Coming Soon — 8 Bit Entertainment</title>
   <meta name="theme-color" content="#000000">
   <style>
-    /* Solid black background, centered content */
     :root{
       --bg:#000000;
       --fg:#e9e9e9;
@@ -30,6 +29,11 @@
       max-width:760px;
       width:100%;
     }
+    img.logo{
+      width:180px;
+      height:auto;
+      margin-bottom:1.5rem;
+    }
     h1{
       margin:0 0 .5rem 0;
       font-size:clamp(28px,6vw,56px);
@@ -41,7 +45,6 @@
       color:var(--muted);
       font-size:clamp(14px,2.5vw,18px);
     }
-    /* subtle pulsing dot animation for "stay tuned" */
     .dots{display:inline-block;margin-left:.5rem}
     .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--fg);opacity:0.2;margin:0 4px;transform:translateY(0);}
     .dot:nth-child(1){animation:dot 1.2s infinite 0s}
@@ -52,7 +55,6 @@
       50%{opacity:1;transform:translateY(-6px)}
       100%{opacity:.2;transform:translateY(0)}
     }
-    /* make links subtle and accessible */
     a{color:var(--fg);text-decoration:underline;opacity:.9}
     @media (prefers-reduced-motion:reduce){
       .dot{animation:none}
@@ -61,6 +63,7 @@
 </head>
 <body>
   <div class="card" role="main">
+    <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
     <h1>Coming soon — stay tuned<span class="dots" aria-hidden="true"><span class="dot"></span><span class="dot"></span><span class="dot"></span></span></h1>
     <p>We're building something 8‑bit and awesome. Check back soon.</p>
   </div>
