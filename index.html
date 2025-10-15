@@ -30,6 +30,7 @@
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
       padding:0;
+      overflow:hidden;
     }
     .card{
       max-width:760px;
@@ -39,12 +40,24 @@
       backdrop-filter:blur(6px);
       padding:2rem;
       position:relative;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
     }
     img.logo{
       width:400px;
       height:auto;
       margin-bottom:2px;
       filter:drop-shadow(0 0 12px #3b1c70);
+      animation: logo-float 4s ease-in-out infinite;
+    }
+    @keyframes logo-float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0px); }
     }
     h1{
       margin:0 0 .75rem 0;
