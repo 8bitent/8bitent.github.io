@@ -18,7 +18,7 @@ html, body {
   margin:0;
   height:100%;
   font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat;
+  background:#000;
   color:var(--fg);
   display:flex;
   flex-direction:column;
@@ -49,21 +49,23 @@ html, body {
   text-decoration:none;
   font-weight:bold;
   font-size:1rem;
-  transition: all 0.3s ease;
+  border:2px solid var(--fg);
+  background:var(--card-color);
+  padding:0.5rem 1rem;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 .top-bar a:hover, .top-bar a.active{
-  color:#00ffff; /* bright hover */
-  text-shadow: 0 0 12px #00ffff;
+  background:var(--fg);
+  color:var(--bg);
+  box-shadow: var(--card-glow);
 }
 .logo-btn img{
   height:80px;
   cursor:pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: drop-shadow(0 0 12px #00ffff);
+  transition: transform 0.3s ease;
 }
 .logo-btn img:hover{
-  transform: scale(1.1);
-  filter: drop-shadow(0 0 20px #00ffff);
+  transform: scale(1.05);
 }
 .songs-container{
   display:flex;
@@ -84,6 +86,11 @@ html, body {
   cursor:pointer;
   overflow:hidden;
   border:2px solid var(--fg);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.song-item:hover{
+  transform: scale(1.05);
+  box-shadow: var(--card-glow);
 }
 .song-item img{
   width:100%;
@@ -98,26 +105,29 @@ html, body {
   background:rgba(0,0,0,0.85);
   display:flex;
   justify-content:center;
-  align-items:center; /* center vertically */
+  align-items:center;
   padding:2rem;
   z-index:50;
   opacity:0;
   visibility:hidden;
   transition:opacity 0.3s ease;
 }
-.lightbox.active{opacity:1; visibility:visible;}
+.lightbox.active{
+  opacity:1;
+  visibility:visible;
+}
 .lightbox video{
   max-width:90%;
   max-height:90%;
   border:2px solid var(--fg);
-  box-shadow: 0 0 20px #00ffff;
+  box-shadow: var(--card-glow);
 }
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
   right:1rem;
   font-size:2rem;
-  color:#fff;
+  color:var(--fg);
   background:transparent;
   border:none;
   cursor:pointer;
@@ -127,7 +137,7 @@ footer{
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top:auto; /* push to bottom */
+  margin-top:auto;
   padding:1rem 0;
 }
 @media(max-width:600px){
@@ -142,7 +152,7 @@ footer{
     <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
     <a href="engineers.html">Engineers</a>
     <a href="artists.html">Artists</a>
-    <a href="songs.html">Songs</a>
+    <a href="songs.html" class="active">Songs</a>
   </div>
 
   <div class="songs-container">
@@ -174,11 +184,13 @@ songItems.forEach(item=>{
     lightbox.classList.add('active');
   });
 });
+
 closeBtn.addEventListener('click',()=>{
   video.pause();
   video.currentTime=0;
   lightbox.classList.remove('active');
 });
+
 lightbox.addEventListener('click',e=>{
   if(e.target===lightbox){
     video.pause();
