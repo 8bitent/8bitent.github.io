@@ -44,7 +44,7 @@
       justify-content:flex-start; 
       position:relative; 
       min-height:100vh; 
-      padding-top:4.5rem; 
+      padding-top:6rem; /* extra space for larger logo */
     }
 
     /* Top-bar */
@@ -61,6 +61,32 @@
       background: rgba(0,0,0,0.25);
       z-index: 10;
       box-shadow: inset 0 -4px 0 var(--accent2); /* Purple line inside */
+    }
+
+    /* Popping logo */
+    .logo-btn img {
+      width: 120px; /* bigger logo */
+      height: auto;
+      filter: drop-shadow(0 0 16px #3b1c70) drop-shadow(0 0 20px #00ffff);
+      transition: transform 0.3s ease, filter 0.3s ease;
+      cursor: pointer;
+    }
+
+    .logo-btn img:hover {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 24px #00ffff) drop-shadow(0 0 32px #ff00ff);
+      animation: logo-pulse 1.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes logo-pulse {
+      0% { transform: scale(1.15); filter: drop-shadow(0 0 20px #00ffff); }
+      50% { transform: scale(1.25); filter: drop-shadow(0 0 28px #ff00ff); }
+      100% { transform: scale(1.15); filter: drop-shadow(0 0 20px #00ffff); }
+    }
+
+    .top-bar .nav-buttons {
+      display:flex;
+      gap:1rem;
     }
 
     .top-bar a {
@@ -81,38 +107,14 @@
       box-shadow: var(--card-glow); 
     }
 
-   /* Logo hover glow + scale */
-  .top-bar .logo-btn {
-  display:inline-block;
-  height:40px;
-  width:auto;
-  filter: drop-shadow(0 0 12px #3b1c70); /* persistent glow */
-  transition: transform 0.6s ease;
-}
-
-.top-bar .logo-btn:hover {
-  animation: logo-glow 1.5s ease-in-out infinite alternate;
-  transform: scale(1.05);
-}
-
-@keyframes logo-glow {
-  0% { filter: drop-shadow(0 0 12px #3b1c70); }
-  50% { filter: drop-shadow(0 0 20px #00ffff) brightness(1.1); }
-  100% { filter: drop-shadow(0 0 12px #3b1c70); }
-}
-
-    .top-bar .nav-buttons {
-      display:flex;
-      gap:1rem;
-    }
-
+    /* Songs container */
     .songs-container {
       display:flex;
       flex-wrap: wrap;
       justify-content:center;
       align-items:center;
       gap:2rem;
-      margin-top:5rem; /* more spacing below top-bar */
+      margin-top:5rem; /* spacing below top-bar */
       width:90%;
     }
 
@@ -131,9 +133,7 @@
       transition: transform 0.3s ease;
     }
 
-    .song-item:hover {
-      transform: scale(1.05);
-    }
+    .song-item:hover { transform: scale(1.05); }
 
     .song-item img {
       width:100%;
@@ -157,17 +157,14 @@
       background:rgba(0,0,0,0.85);
       display:flex;
       justify-content:center;
-      align-items:flex-start; /* top padding applied */
-      padding-top:2rem; /* spacing from top-bar */
+      align-items:flex-start;
+      padding-top:2rem;
       z-index:50;
       opacity:0;
       visibility:hidden;
       transition: opacity 0.3s ease;
     }
-    .lightbox.active {
-      opacity:1;
-      visibility:visible;
-    }
+    .lightbox.active { opacity:1; visibility:visible; }
 
     .lightbox video {
       max-width:90%;
@@ -200,14 +197,16 @@
     @media(max-width:600px){
       .song-item { width:150px; height:150px; }
       .top-bar { padding:0.8rem 1rem; }
-      .home-button { width:40px; height:40px; }
+      .logo-btn img { width:90px; }
     }
   </style>
 </head>
 <body>
   <div id="page-wrapper">
     <div class="top-bar">
-      <a href="index.html"><img src="logo.png" class="logo-btn" alt="8 Bit Entertainment Logo"></a>
+      <a href="index.html" class="logo-btn">
+        <img src="logo.png" alt="8 Bit Entertainment Logo">
+      </a>
       <div class="nav-buttons">
         <a href="engineers.html">Engineers</a>
         <a href="artists.html">Artists</a>
