@@ -60,7 +60,7 @@ html, body {
   font-family:var(--retro-font);
   font-size:1rem;
   transition: all 0.3s ease, box-shadow 0.3s ease;
-  transform: translateX(-26px); /* adjust value to match your visual alignment */
+  transform: translateX(-26px);
 }
 .top-bar a:hover, .top-bar a.active{
   background:var(--fg);
@@ -190,59 +190,39 @@ p{
   z-index:1;
 }
 .card-content.hidden {
-  opacity:0;
-  pointer-events:none;
+  display: none; /* fully hide content */
 }
 
 .mission-text {
   position:absolute;
-  padding:1rem;
   top:0;
   left:0;
   width:100%;
-  display:block;
-  align-items:center;
+  height:100%; /* fill the card */
+  display:flex;
+  flex-direction:column;
   justify-content:center;
-  opacity:0;
-  transition:opacity 0.5s ease;
+  align-items:center;
+  padding:1rem;
   color:var(--fg);
   text-align:center;
   line-height:1.5;
   font-size:clamp(14px,1.5vw,18px);
   z-index:2;
-  white-space: pre-wrap; /* wrap text naturally */
-  overflow: hidden;
-  border-right: 2px solid var(--fg);
-}
-  .mission-text span {
-  border-right: 2px solid var(--fg);
   white-space: pre-wrap;
+  overflow:hidden;
+  opacity:0;
+  border-right:2px solid var(--fg);
+  transition: opacity 0.3s ease;
 }
-  .mission-text.visible {
-  opacity: 1;
-    pointer-events: auto;
+.mission-text.visible {
+  opacity:1;
 }
-
 
 /* Blinking cursor while typing */
-@keyframes blink-cursor {
-  from, to { border-color: transparent; }
-  50% { border-color: var(--fg); }
-}
-
-@keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow:0 0 4px #fff,0 0 8px #3b1c70,0 0 12px #3b1c70;
-  }
-  20%, 24%, 55% {
-    text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; }
-  50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; }
-}
+@keyframes blink-cursor { from,to{border-color:transparent;} 50%{border-color:var(--fg);} }
+@keyframes retro-flicker {0%,19%,21%,23%,25%,54%,56%,100%{text-shadow:0 0 4px #fff,0 0 8px #3b1c70,0 0 12px #3b1c70;}20%,24%,55%{text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70;}}
+@keyframes pulse {0%,100%{opacity:1;text-shadow:0 0 6px #fff,0 0 12px #3b1c70;}50%{opacity:0.8;text-shadow:0 0 4px #fff,0 0 8px #3b1c70;}}
 
 footer{
   position:absolute;
@@ -305,40 +285,37 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   function typeMission(text, speed = 50) {
-  typeSpan.textContent = '';
-  typeSpan.style.animation = 'blink-cursor 0.7s step-end infinite';
-
-  let i = 0;
-  function type() {
-    if (i < text.length) {
-      typeSpan.textContent += text[i];
-      i++;
-      setTimeout(type, speed);
-    } else {
-      typeSpan.style.animation = 'pulse 1.5s infinite';
-    }
-  }
-  type();
-}
-
-missionBtn.addEventListener('click', () => {
-  missionVisible = !missionVisible;
-  if (missionVisible) {
-    cardContent.classList.add('hidden');
-    missionText.classList.add('visible');
-    missionBtn.classList.add('active');
-    typeMission("8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic. We embrace the “low quality” that speaks to the soul, the rhythm that connects culture and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.", 20);
-  } else {
-    cardContent.classList.remove('hidden');
-    missionText.classList.remove('visible');
-    missionBtn.classList.remove('active');
-
-    // Reset span text and animation
     typeSpan.textContent = '';
-    typeSpan.style.animation = '';
+    typeSpan.style.animation = 'blink-cursor 0.7s step-end infinite';
+    let i = 0;
+    function type() {
+      if(i < text.length){
+        typeSpan.textContent += text[i];
+        i++;
+        setTimeout(type, speed);
+      } else {
+        typeSpan.style.animation = 'pulse 1.5s infinite';
+      }
+    }
+    type();
   }
+
+  missionBtn.addEventListener('click', () => {
+    missionVisible = !missionVisible;
+    if(missionVisible){
+      cardContent.classList.add('hidden');
+      missionText.classList.add('visible');
+      missionBtn.classList.add('active');
+      typeMission("8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic. We embrace the “low quality” that speaks to the soul, the rhythm that connects culture and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.", 20);
+    } else {
+      cardContent.classList.remove('hidden');
+      missionText.classList.remove('visible');
+      missionBtn.classList.remove('active');
+      typeSpan.textContent = '';
+      typeSpan.style.animation = '';
+    }
+  });
 });
 </script>
-
 </body>
 </html>
