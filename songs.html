@@ -123,8 +123,6 @@ html, body {
   display:flex;
   justify-content:center;
   align-items:flex-start;
-  padding-top: 10vh;      /* pushes video down */
-  padding:2rem;
   z-index:50;
   opacity:0;
   visibility:hidden;
@@ -134,12 +132,14 @@ html, body {
   opacity:1;
   visibility:visible;
 }
+.video-wrapper {
+  margin-top:10vh; /* pushes video down */
+}
 .lightbox video{
   max-width:90%;
   max-height:90%;
   border:2px solid var(--fg);
   box-shadow: var(--card-glow);
-  transform: translateY(10vh); /* moves it 5% viewport height down from center */
 }
 .lightbox .close-btn{
   position:absolute;
@@ -187,7 +187,9 @@ footer{
 
   <div class="lightbox" id="lightbox">
     <button class="close-btn" id="close-lightbox">&times;</button>
-    <video id="lightbox-video" controls autoplay></video>
+    <div class="video-wrapper">
+      <video id="lightbox-video" controls autoplay></video>
+    </div>
   </div>
 
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
