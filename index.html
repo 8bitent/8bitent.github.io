@@ -153,12 +153,15 @@
     .card-content.hidden { opacity:0; pointer-events:none; }
 
     @media (max-width: 480px) {
+      .content-stack { position:relative; min-height:auto; }
+      .card-content,.mission-text { position:absolute; top:0; left:0; width:100%; }
+      
       /* mobile: show email inside flow below the buttons so it never gets clipped */
       #email { position:relative; left:auto; transform:none; bottom:auto; margin-top:0.75rem; display:none; }
       #email.visible { display: block; opacity: 1; }
       .card { overflow:visible; }
       img.logo { width:200px; }
-      .card { padding:1rem; margin-top:140px; }
+      .card { padding:1rem; margin-top:100px; height:auto; min-height:420px; }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
       .links { display:flex; flex-direction:column; align-items:center; }
