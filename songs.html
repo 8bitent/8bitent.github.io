@@ -35,15 +35,21 @@ html, body {
 .top-bar{
   width:100%;
   display:flex;
-  justify-content:center;
+  justify-content:space-between;
   align-items:center;
-  gap:1rem;
-  padding:1rem 0;
+  padding:1rem 2rem;
   position:fixed;
   top:0;
   left:0;
   background:rgba(0,0,0,0.25);
   z-index:10;
+}
+.top-bar .nav-links{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  flex:1;
 }
 .top-bar a{
   color:var(--fg);
@@ -158,9 +164,11 @@ footer{
 <div id="page-wrapper">
   <div class="top-bar">
     <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
-    <a href="engineers.html">Engineers</a>
-    <a href="artists.html">Artists</a>
-    <a href="songs.html" class="active">Songs</a>
+    <div class="nav-links">
+      <a href="engineers.html">Engineers</a>
+      <a href="artists.html">Artists</a>
+      <a href="songs.html" class="active">Songs</a>
+    </div>
   </div>
 
   <div class="songs-container">
