@@ -39,6 +39,7 @@
     .top-bar {
       width:100%;
       border-bottom:4px solid var(--accent2);
+      gap: 0.75rem; /* adds spacing between buttons */
       display:flex;
       justify-content:flex-end;
       padding:1.25rem 2rem;
@@ -178,6 +179,7 @@
   <div id="page-wrapper">
     <div class="top-bar">
       <a id="artists-top" href="artists.html">Artists</a>
+      <a id="songs-top" href="songs.html">Songs</a>
     </div>
     <div class="card" role="main">
       <button id="mission-btn">Mission</button>
@@ -199,41 +201,48 @@
     <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
   </div>
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      const contactLink = document.getElementById('contact-link');
-      const emailDiv = document.getElementById('email');
-      contactLink.addEventListener('click', () => { emailDiv.classList.toggle('visible'); });
+window.addEventListener('DOMContentLoaded', () => {
+  const contactLink = document.getElementById('contact-link');
+  const emailDiv = document.getElementById('email');
 
-      document.querySelectorAll('#artists-top, #artists-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const href = this.href;
-          const card = document.querySelector('.card');
-          card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-          card.style.opacity = 0;
-          card.style.transform = 'scale(0.95)';
-          setTimeout(() => { window.location.href = href; }, 600);
-        });
-      });
+  contactLink.addEventListener('click', () => {
+    emailDiv.classList.toggle('visible');
+  });
 
-      const missionBtn = document.getElementById('mission-btn');
-      const cardContent = document.querySelector('.card-content');
-      const missionText = document.querySelector('.mission-text');
-      let missionVisible = false;
-
-      missionBtn.addEventListener('click', () => {
-        missionVisible = !missionVisible;
-        if(missionVisible){
-          cardContent.classList.add('hidden');
-          missionText.classList.add('visible');
-          missionBtn.classList.add('active');
-        } else {
-          cardContent.classList.remove('hidden');
-          missionText.classList.remove('visible');
-          missionBtn.classList.remove('active');
-        }
-      });
+  // Fade transition for top-bar and card links
+  document.querySelectorAll('#artists-top, #artists-link, #songs-top').forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      const href = this.href;
+      const card = document.querySelector('.card');
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      card.style.opacity = 0;
+      card.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        window.location.href = href;
+      }, 600);
     });
-  </script>
+  });
+
+  const missionBtn = document.getElementById('mission-btn');
+  const cardContent = document.querySelector('.card-content');
+  const missionText = document.querySelector('.mission-text');
+  let missionVisible = false;
+
+  missionBtn.addEventListener('click', () => {
+    missionVisible = !missionVisible;
+    if (missionVisible) {
+      cardContent.classList.add('hidden');
+      missionText.classList.add('visible');
+      missionBtn.classList.add('active');
+    } else {
+      cardContent.classList.remove('hidden');
+      missionText.classList.remove('visible');
+      missionBtn.classList.remove('active');
+    }
+  });
+});
+</script>
+
 </body>
 </html>
