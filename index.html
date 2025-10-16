@@ -127,18 +127,18 @@ img.logo{
   50%{transform:translateY(-5px);}
   100%{transform:translateY(0px);}
 }
-/* Tiny 8-bit jitter effect for the title */
+/* Subtle 8-bit jitter effect for the title */
 @keyframes retro-jitter {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  10% { transform: translate(-1px, 1px) scale(1.01); }
-  20% { transform: translate(1px, -1px) scale(0.99); }
-  30% { transform: translate(-1px, -1px) scale(1); }
-  40% { transform: translate(1px, 1px) scale(1.02); }
-  50% { transform: translate(-1px, 1px) scale(0.98); }
-  60% { transform: translate(1px, -1px) scale(1.01); }
-  70% { transform: translate(-1px, 0) scale(1); }
-  80% { transform: translate(1px, 1px) scale(1); }
-  90% { transform: translate(0, -1px) scale(1.01); }
+  10% { transform: translate(-0.3px, 0.3px) scale(1.005); }
+  20% { transform: translate(0.3px, -0.3px) scale(0.995); }
+  30% { transform: translate(-0.2px, -0.2px) scale(1); }
+  40% { transform: translate(0.2px, 0.2px) scale(1.01); }
+  50% { transform: translate(-0.3px, 0.3px) scale(0.995); }
+  60% { transform: translate(0.3px, -0.3px) scale(1.005); }
+  70% { transform: translate(-0.2px, 0) scale(1); }
+  80% { transform: translate(0.2px, 0.2px) scale(1); }
+  90% { transform: translate(0, -0.3px) scale(1.005); }
 }
 h1{
   margin:0 0 .75rem 0;
