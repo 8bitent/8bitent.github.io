@@ -24,7 +24,7 @@ html, body {
   overflow:hidden; /* prevent scroll */
   font-family:var(--retro-font);
   background: 
-    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), /* dark overlay */
+    linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), /* dark overlay */
     url('pixel.gif') center/cover no-repeat;           /* your GIF */
   color:var(--fg);
   display:block;
@@ -66,7 +66,6 @@ html, body {
   font-size:1rem;
   transition: all 0.3s ease, box-shadow 0.3s ease;
   transform: translateX(-26px); /* tweak this value (e.g., -10px or -20px) */
-}
 }
 .top-bar a:hover, .top-bar a.active{
   background:var(--fg);
@@ -217,6 +216,10 @@ p{
   line-height:1.5;
   font-size:clamp(14px,1.5vw,18px);
   z-index:2;
+  white-space: nowrap; /* prevent wrapping during typing */
+  overflow: hidden;    /* hide extra text */
+  border-right: 2px solid var(--fg); /* retro cursor */
+  animation: arcade-fade 0.5s ease-in-out forwards;
 }
 .mission-text.visible{
   opacity:1;
@@ -236,6 +239,15 @@ p{
   20%, 24%, 55% {
     text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70;
   }
+}
+  @keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; }
+  50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; }
 }
 
 footer{
@@ -299,19 +311,43 @@ window.addEventListener('DOMContentLoaded', () => {
     emailDiv.classList.toggle('visible');
   });
 
+  function typeMission(text, speed = 50) {
+    missionText.textContent = '';
+    missionText.style.opacity = 1;
+    missionText.style.whiteSpace = 'nowrap';
+    missionText.style.overflow = 'hidden';
+
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        missionText.textContent += text[i];
+        i++;
+        setTimeout(type, speed);
+      } else {
+        missionText.style.whiteSpace = 'normal';
+        missionText.style.overflow = 'visible';
+        missionText.style.animation = 'pulse 1.5s infinite';
+      }
+    }
+    type();
+  }
+
   missionBtn.addEventListener('click', () => {
     missionVisible = !missionVisible;
     if(missionVisible){
       cardContent.classList.add('hidden');
       missionText.classList.add('visible');
       missionBtn.classList.add('active');
+      typeMission("8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic. We embrace the “low quality” that speaks to the soul, the rhythm that connects culture and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.", 20);
     } else {
       cardContent.classList.remove('hidden');
       missionText.classList.remove('visible');
       missionBtn.classList.remove('active');
+      missionText.style.animation = ''; // stop pulsing
     }
   });
 });
 </script>
+
 </body>
 </html>
