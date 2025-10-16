@@ -20,10 +20,12 @@ html, body {
   font-family:var(--retro-font);
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat;
   color:var(--fg);
+  display:flex;
+  flex-direction:column;
 }
 #page-wrapper{
   width:100%;
-  min-height:100vh;
+  flex:1;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -46,17 +48,22 @@ html, body {
   color:var(--fg);
   text-decoration:none;
   font-weight:bold;
-  border:2px solid var(--fg);
-  padding:0.75rem 1.5rem;
-  background:var(--card-color);
-  font-family:var(--retro-font);
   font-size:1rem;
   transition: all 0.3s ease;
 }
 .top-bar a:hover, .top-bar a.active{
-  background:var(--fg);
-  color:var(--bg);
-  box-shadow: var(--card-glow);
+  color:#00ffff; /* bright hover */
+  text-shadow: 0 0 12px #00ffff;
+}
+.logo-btn img{
+  height:80px;
+  cursor:pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: drop-shadow(0 0 12px #00ffff);
+}
+.logo-btn img:hover{
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 20px #00ffff);
 }
 .songs-container{
   display:flex;
@@ -91,8 +98,8 @@ html, body {
   background:rgba(0,0,0,0.85);
   display:flex;
   justify-content:center;
-  align-items:flex-start;
-  padding-top:2rem;
+  align-items:center; /* center vertically */
+  padding:2rem;
   z-index:50;
   opacity:0;
   visibility:hidden;
@@ -101,8 +108,9 @@ html, body {
 .lightbox.active{opacity:1; visibility:visible;}
 .lightbox video{
   max-width:90%;
-  max-height:80%;
+  max-height:90%;
   border:2px solid var(--fg);
+  box-shadow: 0 0 20px #00ffff;
 }
 .lightbox .close-btn{
   position:absolute;
@@ -119,18 +127,19 @@ footer{
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top:2rem;
+  margin-top:auto; /* push to bottom */
+  padding:1rem 0;
 }
 @media(max-width:600px){
   .song-item{width:150px;height:150px;}
-  .top-bar a{padding:0.5rem 1rem; font-size:0.9rem;}
+  .logo-btn img{height:60px;}
 }
 </style>
 </head>
 <body>
 <div id="page-wrapper">
   <div class="top-bar">
-    <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo" style="height:60px;"></a>
+    <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
     <a href="engineers.html">Engineers</a>
     <a href="artists.html">Artists</a>
     <a href="songs.html">Songs</a>
