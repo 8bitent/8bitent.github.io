@@ -64,18 +64,19 @@
     .top-bar a:hover, .top-bar a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
 
     .card{
-      max-width:760px;
-      width:90%;
-      background:var(--card-color);
-      border-radius:20px;
-      backdrop-filter:blur(6px);
-      padding:2rem;
+      max-width: 760px;
+      width: 90%;
+      background: var(--card-color);
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+      padding: 2rem;
       position:relative;
       animation: float 6s ease-in-out infinite;
-      z-index:5;
-      margin-top:1rem;
-      overflow:visible; /* allow positioned elements (email) to appear outside card */
-      height:auto;
+      z-index: 5;
+      margin-top: 0;
+      overflow: visible; /* allow positioned elements (email) to appear outside card */
+      height: auto;
+      top: -1rem;
     }
     @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
