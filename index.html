@@ -96,15 +96,17 @@ body{
   background: var(--card-color);
   border-radius:20px;
   backdrop-filter: blur(6px);
-  padding:2rem;
+  padding:2rem; /* less bottom padding */
   position:relative;
   animation: float 6s ease-in-out infinite;
   z-index:5;
   margin-top:1rem;
-  overflow:visible;
+  overflow:hidden;
   display:flex;
   flex-direction:column;
   align-items:center;
+  justify-content: flex-start; /* keep top spacing for logo */
+  max-height: 700px; /* optional, to prevent overlapping footer */
 }
 
 @keyframes float {
@@ -125,7 +127,19 @@ img.logo{
   50%{transform:translateY(-5px);}
   100%{transform:translateY(0px);}
 }
-
+/* Tiny 8-bit jitter effect for the title */
+@keyframes retro-jitter {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  10% { transform: translate(-1px, 1px) scale(1.01); }
+  20% { transform: translate(1px, -1px) scale(0.99); }
+  30% { transform: translate(-1px, -1px) scale(1); }
+  40% { transform: translate(1px, 1px) scale(1.02); }
+  50% { transform: translate(-1px, 1px) scale(0.98); }
+  60% { transform: translate(1px, -1px) scale(1.01); }
+  70% { transform: translate(-1px, 0) scale(1); }
+  80% { transform: translate(1px, 1px) scale(1); }
+  90% { transform: translate(0, -1px) scale(1.01); }
+}
 h1{
   margin:0 0 .75rem 0;
   font-size:clamp(28px,6vw,56px);
@@ -134,6 +148,15 @@ h1{
   color:var(--fg);
   text-shadow:0 0 10px #3b1c70;
   font-family:var(--retro-font);
+  animation: retro-flicker 1.5s infinite, retro-jitter 0.3s infinite; /* add jitter */
+
+}
+  h1:hover {
+  text-shadow:
+    0 0 6px #fff,
+    0 0 12px #3b1c70,
+    0 0 18px #3b1c70,
+    0 0 24px #ff00ff; /* fun neon accent */
 }
 
 p{
@@ -199,38 +222,49 @@ p{
   pointer-events:auto;
 }
 
-.content-stack{
-  position:relative;
-  width:100%;
+.content-stack {
+  position: relative;
+  width: 100%;
+  display: flex;                /* make it a flex container */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;      /* vertically center card content & mission */
+  height: 100%;                 /* take full height of the card */
 }
 
-.card-content{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;      /* vertically center inside content-stack */
   transition: opacity 0.5s ease;
-  z-index:2;
+  z-index: 1;                   /* below mission-text */
+  height: 100%;                 /* take full height for proper alignment */
+}
+.card-content.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.card-content.hidden{
-  opacity:0;
-  pointer-events:none;
-}
-
-.mission-text{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  opacity:0;
+.mission-text {
+  position: absolute;           /* overlay exactly where card-content is */
+  top: 0;                       /* same vertical starting point */
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;      /* keep it centered in content area */
+  opacity: 0;
   transition: opacity 0.5s ease;
-  font-size:clamp(16px,3vw,22px);
-  color:var(--fg);
-  text-align:center;
-  line-height:1.5;
-  font-family:var(--retro-font);
-  margin-top:1.5rem; /* distance from logo */
-  padding-bottom:0.5rem; /* reduce bottom gap */
+  font-size: clamp(16px,3vw,22px);
+  color: var(--fg);
+  text-align: center;
+  line-height: 1.5;
+  font-family: var(--retro-font);
+  margin-top: 0;                /* remove extra margin */
+  padding-bottom: 0;            /* remove bottom gap */
+  z-index: 2;                   /* above card content when visible */
 }
 
 .mission-text.visible{
@@ -243,7 +277,22 @@ p{
   50%{opacity:1; transform:scale(1.02);}
   100%{opacity:1; transform:scale(1);}
 }
-
+/* Retro flicker effect for the title */
+@keyframes retro-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow: 
+      0 0 4px #fff, 
+      0 0 8px #3b1c70, 
+      0 0 12px #3b1c70;
+  }
+  20%, 24%, 55% {
+    text-shadow: 
+      0 0 2px #fff, 
+      0 0 4px #3b1c70, 
+      0 0 6px #3b1c70;
+  }
+}
+  
 footer{
   position:absolute;
   bottom:1rem;
@@ -307,17 +356,17 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   missionBtn.addEventListener('click', () => {
-    missionVisible = !missionVisible;
-    if(missionVisible){
-      cardContent.classList.add('hidden');
-      missionText.classList.add('visible');
-      missionBtn.classList.add('active');
-    } else {
-      cardContent.classList.remove('hidden');
-      missionText.classList.remove('visible');
-      missionBtn.classList.remove('active');
-    }
-  });
+  missionVisible = !missionVisible;
+  if(missionVisible){
+    cardContent.classList.add('hidden');      // hide title/desc/buttons
+    missionText.classList.add('visible');     // show mission
+    missionBtn.classList.add('active');       // highlight button
+  } else {
+    cardContent.classList.remove('hidden');   // restore title/desc/buttons
+    missionText.classList.remove('visible');  // hide mission
+    missionBtn.classList.remove('active');    // unhighlight
+  }
+});
 });
 </script>
 </body>
