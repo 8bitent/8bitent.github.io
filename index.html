@@ -70,7 +70,7 @@ body{
   right:0;
   background:rgba(0,0,0,0.25);
   z-index:10;
-  box-shadow: inset 0 -4px 0 var(--accent2);
+  box-shadow: none;
 }
 .top-bar a{
   color:var(--fg);
@@ -106,7 +106,7 @@ body{
   flex-direction:column;
   align-items:center;
   justify-content: flex-start; /* keep top spacing for logo */
-  max-height: 700px; /* optional, to prevent overlapping footer */
+  max-height: calc(100vh - 8rem);; /* viewport minus top padding + some space */
 }
 
 @keyframes float {
