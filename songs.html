@@ -37,18 +37,19 @@
     #page-wrapper { width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; position:relative; min-height:100vh; padding-top:4.5rem; }
 
     .top-bar {
-      width:100%;
-      border-bottom:4px solid var(--accent2);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:1rem 2rem;
-      box-sizing:border-box;
-      position:fixed;
-      top:0;
-      left:0;
-      background:rgba(0,0,0,0.25);
-      z-index:10;
+      width: 100%;
+      display: flex;
+      justify-content: space-between; /* logo left, buttons right */
+      align-items: center;
+      padding: 1rem 2rem;
+      box-sizing: border-box;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 10;
+      border-bottom: none; /* remove the problematic border */
+      box-shadow: 0 4px 0 var(--accent2); /* subtle purple line under the bar */
     }
     .top-bar a {
       color:var(--fg);
@@ -60,6 +61,15 @@
       font-size:1rem;
       transition: all 0.3s ease, box-shadow 0.3s ease;
       background:var(--card-color);
+    }
+    .top-bar .logo-btn {
+      display: inline-block;
+      height: 40px; /* adjust size */
+      width: auto;
+    }
+    .top-bar .nav-buttons {
+      display: flex;
+      gap: 1rem; /* spacing between the three buttons */
     }
     .top-bar a:hover, .top-bar a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
 
@@ -161,17 +171,17 @@
 <body>
   <div id="page-wrapper">
     <div class="top-bar">
-      <a id="engineers-top" href="engineers.html">Engineers</a>
-      <button class="home-button" onclick="window.location.href='index.html'">
-        <img src="logo.png" alt="8 Bit Home">
-      </button>
-      <a id="artists-top" href="artists.html">Artists</a>
-      <a id="songs-top" href="songs.html">Songs</a>
-    </div>
+  <a href="index.html"><img src="logo.png" class="logo-btn" alt="8 Bit Entertainment Logo"></a>
+  <div class="nav-buttons">
+    <a href="engineers.html">Engineers</a>
+    <a href="artists.html">Artists</a>
+    <a href="songs.html">Songs</a>
+  </div>
+</div>
 
     <div class="songs-container">
       <!-- First song: Jailla - Busy Tme -->
-      <div class="song-item" data-video="busy_tme.mp4">
+      <div class="song-item" data-video="Video.mp4">
         <img src="cover1.jpg" alt="Jailla - Busy Tme">
       </div>
     </div>
