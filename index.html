@@ -205,7 +205,7 @@ white-space: nowrap; /* prevent wrapping during typing */
 overflow: hidden; /* hide extra text */ 
 border-right: 2px solid var(--fg); /* retro cursor */ 
 animation: arcade-fade 0.5s ease-in-out forwards; 
-animation: blink-cursor 0.7s step-end infinite; 
+/* animation: blink-cursor 0.7s step-end infinite; */ 
 } 
 .mission-text.visible{ 
 opacity:1; 
@@ -216,7 +216,6 @@ animation: arcade-fade 0.5s ease-in-out;
 50%{opacity:1; transform:scale(1.02);} 
 100%{opacity:1; transform:scale(1);} 
 } 
-@keyframes blink-cursor { from, to { border-color: transparent; } 50% { border-color: var(--fg); } } 
 @keyframes retro-flicker { 0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff,0 0 8px #3b1c70,0 0 12px #3b1c70; } 20%, 24%, 55% { text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70; } } 
 @keyframes typing { from { width: 0; } to { width: 100%; } } 
 @keyframes pulse { 0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; } 50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; } } 
