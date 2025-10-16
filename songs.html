@@ -19,6 +19,7 @@
       --card-color:rgba(26,26,64,0.25);
       --card-glow:0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
     }
+
     html,body{ height:100%; margin:0; overflow-x:hidden; }
     body{
       background:linear-gradient(145deg, var(--accent3), var(--bg), var(--accent1));
@@ -34,12 +35,23 @@
       padding:0;
       overflow-x:hidden;
     }
-    #page-wrapper { width:100%; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; position:relative; min-height:100vh; padding-top:4.5rem; }
 
+    #page-wrapper { 
+      width:100%; 
+      display:flex; 
+      flex-direction:column; 
+      align-items:center; 
+      justify-content:flex-start; 
+      position:relative; 
+      min-height:100vh; 
+      padding-top:4.5rem; 
+    }
+
+    /* Top-bar */
     .top-bar {
       width: 100%;
       display: flex;
-      justify-content: space-between; /* logo left, buttons right */
+      justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
       box-sizing: border-box;
@@ -48,9 +60,9 @@
       left: 0;
       background: rgba(0,0,0,0.25);
       z-index: 10;
-      border-bottom: none; /* remove the problematic border */
-      box-shadow: 0 4px 0 var(--accent2); /* subtle purple line under the bar */
+      box-shadow: inset 0 -4px 0 var(--accent2); /* Purple line inside */
     }
+
     .top-bar a {
       color:var(--fg);
       text-decoration:none;
@@ -59,31 +71,31 @@
       padding:0.5rem 1.2rem;
       border-radius:15px;
       font-size:1rem;
-      transition: all 0.3s ease, box-shadow 0.3s ease;
       background:var(--card-color);
+      transition: all 0.3s ease, box-shadow 0.3s ease;
     }
-    .top-bar .logo-btn {
-      display: inline-block;
-      height: 40px; /* adjust size */
-      width: auto;
-    }
-    .top-bar .nav-buttons {
-      display: flex;
-      gap: 1rem; /* spacing between the three buttons */
-    }
-    .top-bar a:hover, .top-bar a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
 
-    /* logo/home button in center */
-    .home-button {
-      width:50px;
-      height:50px;
-      background:transparent;
-      border:none;
-      cursor:pointer;
+    .top-bar a:hover, .top-bar a.active { 
+      background:var(--fg); 
+      color:var(--bg); 
+      box-shadow: var(--card-glow); 
     }
-    .home-button img {
-      width:100%;
-      height:auto;
+
+    /* Logo hover glow + scale */
+    .top-bar .logo-btn {
+      display:inline-block;
+      height:40px;
+      width:auto;
+      transition: filter 0.6s ease, transform 0.6s ease;
+    }
+    .top-bar .logo-btn:hover {
+      filter: drop-shadow(0 0 15px #00ffff) brightness(1.1);
+      transform: scale(1.05);
+    }
+
+    .top-bar .nav-buttons {
+      display:flex;
+      gap:1rem;
     }
 
     .songs-container {
@@ -92,9 +104,10 @@
       justify-content:center;
       align-items:center;
       gap:2rem;
-      margin-top:2rem;
+      margin-top:5rem; /* more spacing below top-bar */
       width:90%;
     }
+
     .song-item {
       width:200px;
       height:200px;
@@ -109,9 +122,11 @@
       position:relative;
       transition: transform 0.3s ease;
     }
+
     .song-item:hover {
-      transform: scale(1.05); /* subtle zoom on hover */
+      transform: scale(1.05);
     }
+
     .song-item img {
       width:100%;
       height:100%;
@@ -119,9 +134,14 @@
       border-radius:20px;
       pointer-events:none;
     }
-    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-    /* lightbox */
+    @keyframes float { 
+      0% { transform: translateY(0px); } 
+      50% { transform: translateY(-10px); } 
+      100% { transform: translateY(0px); } 
+    }
+
+    /* Lightbox */
     .lightbox {
       position:fixed;
       top:0; left:0;
@@ -129,7 +149,8 @@
       background:rgba(0,0,0,0.85);
       display:flex;
       justify-content:center;
-      align-items:center;
+      align-items:flex-start; /* top padding applied */
+      padding-top:2rem; /* spacing from top-bar */
       z-index:50;
       opacity:0;
       visibility:hidden;
@@ -139,13 +160,15 @@
       opacity:1;
       visibility:visible;
     }
+
     .lightbox video {
       max-width:90%;
       max-height:80%;
       border-radius:15px;
       box-shadow:0 0 20px var(--accent2);
-      cursor: pointer;
+      cursor:pointer;
     }
+
     .lightbox .close-btn {
       position:absolute;
       top:1rem; right:1rem;
@@ -176,22 +199,21 @@
 <body>
   <div id="page-wrapper">
     <div class="top-bar">
-  <a href="index.html"><img src="logo.png" class="logo-btn" alt="8 Bit Entertainment Logo"></a>
-  <div class="nav-buttons">
-    <a href="engineers.html">Engineers</a>
-    <a href="artists.html">Artists</a>
-    <a href="songs.html">Songs</a>
-  </div>
-</div>
+      <a href="index.html"><img src="logo.png" class="logo-btn" alt="8 Bit Entertainment Logo"></a>
+      <div class="nav-buttons">
+        <a href="engineers.html">Engineers</a>
+        <a href="artists.html">Artists</a>
+        <a href="songs.html">Songs</a>
+      </div>
+    </div>
 
     <div class="songs-container">
-      <!-- First song: Jailla - Busy Tme -->
       <div class="song-item" data-video="Video.mp4">
         <img src="cover1.jpg" alt="Jailla - Busy Tme">
       </div>
     </div>
 
-    <!-- Lightbox for video playback -->
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
       <button class="close-btn" id="close-lightbox">&times;</button>
       <video id="lightbox-video" controls autoplay></video>
@@ -221,7 +243,6 @@
       lightbox.classList.remove('active');
     });
 
-    // Clicking outside video closes lightbox
     lightbox.addEventListener('click', e => {
       if(e.target === lightbox){
         video.pause();
