@@ -232,6 +232,11 @@ color:var(--muted);
   body {
     overflow-y: auto; /* allow scrolling on small screens */
   }
+  
+  #page-wrapper {
+    height: auto;
+    padding-bottom: 3rem; /* space for footer */
+  }
 
   .card {
     width: 95%;
@@ -243,6 +248,15 @@ color:var(--muted);
   img.logo {
     width: 160px;
     margin-bottom: 1rem;
+  }
+  html, body {
+    max-width:600px;
+    overflow-x:hidden;
+  }
+  {
+  .links a,
+  #mission-btn {
+    min-height: 36px; /* better touch size */
   }
 
   h1 {
