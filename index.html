@@ -218,6 +218,10 @@ p{
   border-right: 2px solid var(--fg);
   white-space: pre-wrap;
 }
+  .mission-text.visible {
+  opacity: 1;
+    pointer-events: auto;
+}
 
 
 /* Blinking cursor while typing */
@@ -331,7 +335,6 @@ missionBtn.addEventListener('click', () => {
 
     // Reset span text and animation
     typeSpan.textContent = '';
-    missionText.style.opacity = 0;
     typeSpan.style.animation = '';
   }
 });
