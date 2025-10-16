@@ -18,27 +18,36 @@
       --accent3:#1b1b2f;
       --card-color:rgba(26,26,64,0.25);
       --card-glow:0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
+      --logo-glow:0 0 16px #3b1c70, 0 0 32px #3b1c70;
     }
-    html,body{ height:100%; margin:0; overflow:hidden; }
-    body{
-      background:linear-gradient(145deg, var(--accent3), var(--bg), var(--accent1));
-      color:var(--fg);
+
+    html, body {
+      height:100%;
+      margin:0;
+      overflow:hidden;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      background: linear-gradient(145deg, var(--accent3), var(--bg), var(--accent1));
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    #page-wrapper {
+      width:100%;
       display:flex;
       flex-direction:column;
       align-items:center;
-      justify-content:flex-start;
-      text-align:center;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      padding:0;
-      overflow:hidden;
+      justify-content:center;
+      position:relative;
+      min-height:100vh;
     }
-    #page-wrapper { width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; min-height:100vh; }
 
     .top-bar {
       width:100%;
-      border-bottom:4px solid var(--accent2);
       display:flex;
       justify-content:space-around;
       align-items:center;
@@ -49,9 +58,12 @@
       left:0;
       background:rgba(0,0,0,0.25);
       z-index:10;
+      /* safe border alternative using box-shadow */
+      box-shadow: inset 0 -4px 0 var(--accent2);
     }
+
     .top-bar a {
-      color:var(--fg);
+      color: var(--fg);
       text-decoration:none;
       font-weight:bold;
       border:2px solid var(--fg);
@@ -59,9 +71,14 @@
       border-radius:15px;
       font-size:1.2rem;
       transition: all 0.3s ease, box-shadow 0.3s ease;
-      background:var(--card-color);
+      background: var(--card-color);
     }
-    .top-bar a:hover, .top-bar a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
+
+    .top-bar a:hover, .top-bar a.active {
+      background: var(--fg);
+      color: var(--bg);
+      box-shadow: var(--card-glow);
+    }
 
     .card{
       max-width: 760px;
@@ -72,14 +89,27 @@
       padding: 2rem;
       position:relative;
       animation: float 6s ease-in-out infinite;
-      z-index: 5;
       margin-top: 1rem;
-      overflow: visible; /* allow positioned elements (email) to appear outside card */
-      height: auto;
+      height:auto;
+      overflow:visible;
     }
+
     @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-10px); } 100% { transform: translateY(0px); } }
 
-    img.logo{ width:350px; height:auto; margin-bottom:10px; filter:drop-shadow(0 0 12px #3b1c70); animation: logo-float 4s ease-in-out infinite; }
+    img.logo {
+      width:350px;
+      height:auto;
+      margin-bottom:10px;
+      filter: drop-shadow(0 0 12px #3b1c70);
+      animation: logo-float 4s ease-in-out infinite;
+      transition: box-shadow 0.6s ease, transform 0.6s ease;
+    }
+
+    img.logo:hover {
+      box-shadow: var(--logo-glow);
+      transform: scale(1.05);
+    }
+
     @keyframes logo-float { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
 
     h1{ margin:0 0 .75rem 0; font-size:clamp(28px,6vw,56px); letter-spacing:1px; line-height:1.05; color:var(--fg); text-shadow:0 0 10px #3b1c70; }
@@ -96,17 +126,15 @@
       background:var(--card-color);
       color:var(--fg);
       cursor:pointer;
-      transition: all 0.3s ease, box-shadow 0.3s ease;
       z-index:10;
     }
+
     #mission-btn:hover, #mission-btn.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
 
     .links a{
       color:var(--fg);
       text-decoration:none;
       margin:0 .75rem;
-      opacity:.8;
-      transition: all 0.3s ease, box-shadow 0.3s ease;
       cursor:pointer;
       font-weight:bold;
       border:2px solid var(--fg);
@@ -114,11 +142,11 @@
       border-radius:15px;
       display:inline-block;
       background:var(--card-color);
+      transition: all 0.3s ease, box-shadow 0.3s ease;
     }
     .links a:hover, .links a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow); }
 
     #email{ position:absolute; left:50%; transform:translateX(-50%); bottom:-30px; color:var(--fg); opacity:0; pointer-events:none; transition:opacity 0.3s ease; font-size:clamp(14px,2.5vw,18px); z-index:20; }
-    #email.visible{ opacity:1; pointer-events:auto; }
     #email.visible{ opacity:1; pointer-events:auto; }
 
     footer{ position:absolute; bottom:1rem; left:0; width:100%; text-align:center; font-size:12px; color:var(--muted); }
@@ -140,7 +168,7 @@
       align-items:center;
       justify-content:center;
       padding:0 1rem;
-      transform: translateX(-2%); /* move slightly left */
+      transform: translateX(-2%);
     }
     .mission-text.visible { opacity:1; }
 
@@ -161,13 +189,10 @@
       .content-stack { position:relative; min-height:auto; }
       .card-content { position:absolute; top:0; left:0; width:100%; }
       .mission-text { position:absolute; top:0; width:100%; transform: translateX(-50%); left: 49.5%; }
-      
-      /* mobile: show email inside flow below the buttons so it never gets clipped */
       #email { position:relative; left:auto; transform:none; bottom:auto; margin-top:0.65rem; display:none; }
       #email.visible { display: block; opacity: 1; }
-      .card { overflow:visible; }
+      .card { overflow:visible; padding:1rem; margin-top:40px; height:auto; min-height:410px; }
       img.logo { width:200px; }
-      .card { padding:1rem; margin-top:40px; height:auto; min-height:410px; }
       h1 { font-size:clamp(22px,8vw,32px); }
       p { font-size:clamp(12px,4vw,16px); }
       .links { display:flex; flex-direction:column; align-items:center; }
@@ -183,7 +208,6 @@
       <a id="engineers-top" href="engineers.html">Engineers</a>
       <a id="artists-top" href="artists.html">Artists</a>
       <a id="songs-top" href="songs.html">Songs</a>
-      
     </div>
     <div class="card" role="main">
       <button id="mission-btn">Mission</button>
@@ -212,21 +236,6 @@ window.addEventListener('DOMContentLoaded', () => {
     emailDiv.classList.toggle('visible');
   });
 
-  // Fade transition for top-bar and card links
-  document.querySelectorAll('#artists-top, #artists-link, #songs-top').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-      const href = this.href;
-      const card = document.querySelector('.card');
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      card.style.opacity = 0;
-      card.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        window.location.href = href;
-      }, 600);
-    });
-  });
-
   const missionBtn = document.getElementById('mission-btn');
   const cardContent = document.querySelector('.card-content');
   const missionText = document.querySelector('.mission-text');
@@ -246,6 +255,5 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 </script>
-
 </body>
 </html>
