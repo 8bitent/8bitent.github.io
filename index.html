@@ -220,6 +220,7 @@ p{
   overflow: hidden;    /* hide extra text */
   border-right: 2px solid var(--fg); /* retro cursor */
   animation: arcade-fade 0.5s ease-in-out forwards;
+  animation: blink-cursor 0.7s step-end infinite;
 }
 .mission-text.visible{
   opacity:1;
@@ -230,6 +231,10 @@ p{
   0%{opacity:0; transform:scale(0.95);}
   50%{opacity:1; transform:scale(1.02);}
   100%{opacity:1; transform:scale(1);}
+}
+  @keyframes blink-cursor {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--fg); }
 }
 
 @keyframes retro-flicker {
