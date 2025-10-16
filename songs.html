@@ -44,12 +44,14 @@ html, body {
   background:rgba(0,0,0,0.25);
   z-index:10;
 }
-.top-bar .nav-links{
+.nav-left {
   display:flex;
-  justify-content:center;
   align-items:center;
-  gap:1rem;
-  flex:1;
+}
+.nav-right {
+  display:flex;
+  align-items:center;
+  gap:2rem; /* spacing between right buttons */
 }
 .top-bar a{
   color:var(--fg);
@@ -157,14 +159,17 @@ footer{
 @media(max-width:600px){
   .song-item{width:150px;height:150px;}
   .logo-btn img{height:60px;}
+  .nav-right {gap:1rem;}
 }
 </style>
 </head>
 <body>
 <div id="page-wrapper">
   <div class="top-bar">
-    <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
-    <div class="nav-links">
+    <div class="nav-left">
+      <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
+    </div>
+    <div class="nav-right">
       <a href="engineers.html">Engineers</a>
       <a href="artists.html">Artists</a>
       <a href="songs.html" class="active">Songs</a>
