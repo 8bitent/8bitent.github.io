@@ -195,6 +195,14 @@ footer{
   margin-top:auto;
   padding-bottom: 1rem; /* 1rem from bottom */
 }
+  /* Logo hover glow */
+.logo-btn img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+  .logo-btn img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
+}
 
 /* ===== FLICKER ===== */
 @keyframes retro-flicker {
