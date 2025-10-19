@@ -69,20 +69,19 @@ html, body {
   color: var(--fg);
   text-decoration: none;
   font-weight: bold;
-  font-size: 1rem;
-  border: 1px solid var(--fg);
-  padding: 0.5rem 1rem;
+  border: 2px solid var(--fg);
+  padding: 0.75rem 1.5rem;
   background: var(--card-color);
   font-family: var(--retro-font);
+  font-size: 1rem;
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Smooth retro fill-in hover for all nav buttons */
-.nav-right a:hover, .nav-left a:hover {
-  background: var(--fg); /* fill-in white */
-  color: var(--bg);       /* text turns black */
-  box-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px #fff;
-  transform: scale(1.05);
+.nav-right a:hover, .nav-left a:hover,
+.nav-right a.active, .nav-left a.active {
+  background: var(--fg);
+  color: var(--bg);
+  box-shadow: var(--card-glow);
 }
 
 .nav-right a.active {
