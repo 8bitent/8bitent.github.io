@@ -105,11 +105,11 @@ html, body {
   scrollbar-gutter: stable both-edges;
 }
 
-/* ===== SONGS GRID ===== */
+/* ===== SONGS GRID (3 per row) ===== */
 .songs-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;           /* allow multiple rows */
+  justify-content: center;    /* center rows */
   gap: 2rem;
   width: 95%;
   padding-bottom: 4rem;
@@ -117,8 +117,8 @@ html, body {
 }
 
 .song-item {
-  width: 100%;
-  max-width: 600px;
+  flex: 1 1 calc(33.333% - 1.33rem); /* 3 per row with gaps */
+  max-width: 300px;                  /* optional maximum width */
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
@@ -222,6 +222,10 @@ footer{
   }
   .top-bar-title { font-size: 1.4rem; }
   .lightbox video { max-width: 90%; max-height: 90%; }
+  .song-item {
+    flex: 1 1 100%;    /* 1 per row on mobile */
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 600px) {
