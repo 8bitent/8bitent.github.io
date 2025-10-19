@@ -15,6 +15,11 @@
   --retro-font: 'Press Start 2P', cursive;
 }
 
+/* Global cursor: League of Legends Pointer */
+* {
+  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
+}
+
 html, body {
   margin:0;
   min-height:100vh;
@@ -123,7 +128,6 @@ html, body {
   background: var(--card-color);
   border: 3px dashed #fff;
   border-radius: 0; /* keep it sharp */
-  cursor: pointer;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -144,7 +148,7 @@ html, body {
   margin-top: 1rem;
   font-size: 1rem;
   text-align: center;
-  line-height: 1.6; /* increase for more space between lines */
+  line-height: 1.6;
 }
 
 .song-title a {
@@ -200,7 +204,6 @@ html, body {
   color:var(--fg);
   background:transparent;
   border:none;
-  cursor:pointer;
 }
 
 footer{
@@ -216,14 +219,14 @@ footer{
   max-height: 95px;
   width: auto;
   display: block;
-  animation: pulse 2s infinite ease-in-out; /* continuous pulse */
+  animation: pulse 2s infinite ease-in-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo-btn img:hover {
-  animation-play-state: paused; /* stop pulsing */
-  transform: scale(1.1);        /* keep zoomed in */
-  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70; /* keep glow */
+  animation-play-state: paused;
+  transform: scale(1.1);
+  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
 }
 
 @keyframes pulse {
@@ -232,12 +235,8 @@ footer{
 }
 
 @keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70;
-  }
-  20%, 24%, 55% {
-    text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70;
-  }
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70; }
+  20%, 24%, 55% { text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70; }
 }
 
 @media (max-width: 800px) {
@@ -318,6 +317,11 @@ footer{
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
 
+<!-- Optional cursor preview link -->
+<a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
+  <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
+</a>
+
 <script>
 const songItems = document.querySelectorAll('.song-item');
 const lightbox = document.getElementById('lightbox');
@@ -328,7 +332,7 @@ songItems.forEach(item => {
   item.addEventListener('click', () => {
     const src = item.getAttribute('data-video');
     video.src = src;
-    video.volume = 0.5;  // Set to 50% volume
+    video.volume = 0.5;
     video.play();
     lightbox.classList.add('active');
   });
