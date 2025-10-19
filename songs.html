@@ -39,6 +39,10 @@ html, body {
   left:0;
   background:rgba(0,0,0,0.25);
   z-index:10;
+  pointer-events: none; /* ⬅️ lets scrollbar clicks go through */
+}
+  .top-bar * {
+  pointer-events: auto; /* ⬅️ restores interactivity for inner elements */
 }
 
 .nav-left { display:flex; align-items:center; }
@@ -55,17 +59,7 @@ html, body {
   font-family:var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
-  .top-bar::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20px; /* about the scrollbar width */
-  height: 100%;
-  background: transparent;
-  pointer-events: none; /* this strip lets the scrollbar through */
-}
-
+  
 .top-bar a:hover {
   background: var(--card-color);
   color: var(--fg);
