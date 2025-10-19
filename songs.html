@@ -43,14 +43,15 @@ html, body {
   border-bottom: 2px solid var(--fg);
   flex-wrap: wrap;
   gap: 1rem;
+  position: relative;
 }
 
 /* ===== TITLE FIX ===== */
 .top-bar-title-container {
-  width: 100%;
-  max-width: 600px; /* aligns with video column */
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 600px;
   text-align: left;
 }
 
@@ -213,15 +214,11 @@ footer{
     align-items: center;
     gap: 0.5rem;
   }
-  .nav-left, .nav-right {
-    justify-content: center;
-    flex-wrap: wrap;
-  }
   .top-bar-title-container {
+    position: static;
+    transform: none;
     max-width: 100%;
     text-align: center;
-    margin-left: 0;
-    margin-right: 0;
   }
   .top-bar-title { font-size: 1.4rem; }
   .lightbox video { max-width: 90%; max-height: 90%; }
