@@ -158,15 +158,22 @@ footer{
 }
 
 .logo-btn img {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-height: 95px;
   width: auto;
-  display:block;
+  display: block;
+  animation: pulse 2s infinite ease-in-out; /* continuous pulsing by default */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo-btn img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
+  animation-play-state: paused; /* stop pulsing on hover */
+  transform: scale(1.1);        /* stays zoomed in while hovered */
+  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70; /* glow stays on hover */
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); } /* gently grows and shrinks */
 }
 
 @keyframes retro-flicker {
