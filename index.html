@@ -266,20 +266,20 @@ footer{
   #page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center; /* center card vertically */
+    justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding-top: calc(0.5rem + env(safe-area-inset-top)); /* tiny space above top bar */
-    padding-bottom: 3rem; /* space for footer */
+    padding-top: calc(0.5rem + env(safe-area-inset-top));
+    padding-bottom: 3rem;
     box-sizing: border-box;
   }
 
-  /* ===== MOBILE TOP BAR BUTTONS FIXED ===== */
+  /* ===== MOBILE TOP BAR BUTTONS: 2 + 1 LAYOUT ===== */
   .top-bar {
-    flex-direction: row; /* side by side */
-    justify-content: space-around;
-    gap: 0.5rem;
-    padding: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.5rem 0.25rem;
     padding-top: calc(0.5rem + env(safe-area-inset-top));
     position: fixed;
     top: 0;
@@ -290,19 +290,23 @@ footer{
   }
 
   .top-bar a {
-    font-size: 12px;
-    padding: 0.6rem 1.2rem; /* taller & wider */
-    min-width: 120px; /* wider buttons */
-    flex: 1; /* all buttons equal width */
+    flex: 0 0 48%;      /* first two buttons ~ half-width */
     text-align: center;
-    border-radius: 4px; /* subtle retro blocky look */
+    padding: 0.6rem 0;
+    font-size: 12px;
+    border-radius: 4px;
     transform: none;
+  }
+
+  .top-bar a:nth-child(3) {
+    flex: 0 0 100%;     /* third button full width */
+    margin-top: 0.3rem;
   }
 
   .card {
     width: 85%;
     min-height: 300px;
-    max-height: calc(100vh - (0.5rem + 3rem + env(safe-area-inset-top))); /* between top bar + footer */
+    max-height: calc(100vh - (0.5rem + 3rem + env(safe-area-inset-top)));
     padding: 1.2rem;
     animation: none;
     height: auto;
@@ -372,7 +376,7 @@ window.addEventListener('DOMContentLoaded', () => {
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
-    missionText.style.animation = ''; // reset pulse
+    missionText.style.animation = ''; 
     
     let i = 0;
     function type() {
