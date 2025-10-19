@@ -127,13 +127,15 @@ html, body {
   opacity:0;
   visibility:hidden;
   transition:opacity 0.3s ease;
+  padding-top: 10vh; /* pushes video down properly */
+}
 }
 .lightbox.active{
   opacity:1;
   visibility:visible;
 }
 .video-wrapper {
-  margin-top:10vh; /* pushes video down */
+  margin-top:0; /* pushes video down */
 }
 .lightbox video{
   max-width:90%;
