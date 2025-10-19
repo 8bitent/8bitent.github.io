@@ -22,7 +22,7 @@ html, body {
   font-family:var(--retro-font);
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat fixed;
   color:var(--fg);
-  overflow-x:hidden;
+  overflow: hidden; /* body won't scroll, content wrapper will */
   display:flex;
   flex-direction:column;
 }
@@ -49,7 +49,7 @@ html, body {
 .nav-right {
   display:flex;
   align-items:center;
-  gap:3rem;
+  gap:2rem; /* adjust to move buttons slightly */
 }
 
 .top-bar a{
@@ -72,12 +72,10 @@ html, body {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Active page button */
 .top-bar a.active {
   animation: retro-flicker 1.5s infinite;
 }
 
-/* Centered page title */
 .top-bar-title {
   position: absolute;
   left: 50%;
@@ -89,27 +87,30 @@ html, body {
   animation: retro-flicker 1.5s infinite;
 }
 
-/* ===== SONGS GRID ===== */
+/* ===== PAGE WRAPPER ===== */
 #page-wrapper{
+  flex: 1;                  /* fills remaining vertical space */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top:8rem;         /* space for top bar */
+  overflow-y: auto;         /* scrollable content */
   width:100%;
-  padding-top:8rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
 }
 
+/* ===== SONGS GRID ===== */
 .songs-container {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;   /* one per row */
+  align-items: center;
   gap: 2rem;
   width: 95%;
 }
 
 .song-item {
-  flex: 1 1 calc(20% - 2rem);
-  max-width: 300px;
-  aspect-ratio: 1 / 1;
+  width: 100%;
+  max-width: 800px;         /* optional max width */
+  aspect-ratio: 16/9;       /* rectangle suitable for video covers */
   background: var(--card-color);
   display: flex;
   align-items: center;
@@ -171,7 +172,6 @@ html, body {
   }
 }
 
-/* Close button */
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
@@ -189,7 +189,7 @@ footer{
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top:2rem;
+  margin-top: auto;  /* sticks footer to bottom */
 }
 
 /* ===== RETRO FLICKER ANIMATION ===== */
@@ -204,11 +204,11 @@ footer{
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1000px) {
-  .song-item { flex: 1 1 calc(33.33% - 2rem); }
+  .song-item { max-width: 90%; }
 }
 
 @media (max-width: 600px) {
-  .song-item { flex: 1 1 calc(50% - 1rem); }
+  .song-item { max-width: 100%; }
   .top-bar-title { font-size: 1.2rem; }
 }
 </style>
@@ -222,7 +222,6 @@ footer{
       <a href="index.html" class="logo-btn"><img src="logo.png" alt="Logo" style="height:80px;"></a>
     </div>
 
-    <!-- Centered page title -->
     <div class="top-bar-title">Songs</div>
 
     <div class="nav-right">
