@@ -5,355 +5,43 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>8 Bit Entertainment</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-:root{
-  --bg:#000000;
-  --fg:#ffffff;
-  --muted:#b3b3cc;
-  --accent1:#1a1a40;
-  --accent2:#3b1c70;
-  --accent3:#1b1b2f;
-  --card-color:rgba(26,26,64,0.25);
-  --card-glow:0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
-  --retro-font: 'Press Start 2P', cursive;
-}
-
-html, body {
-  margin:0;
-  height:100%;
-  overflow:hidden;
-  font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
-              url('pixel.gif') center/cover no-repeat;
-  color:var(--fg);
-  display:block;
-}
-
-#page-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* vertical centering */
-  min-height: 100vh;
-  position: relative;
-  padding-top: none;    /* space for top bar */
-  padding-bottom: none; /* optional space for footer */
-  overflow: hidden;     /* prevent scroll */
-}
-
-.top-bar {
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  padding:1rem 0;
-  position:fixed;
-  top:0;
-  left:0;
-  background:rgba(0,0,0,0.25);
-  z-index:10;
-}
-
-.top-bar a{
-  color:var(--fg);
-  text-decoration:none;
-  font-weight:bold;
-  border:2px solid var(--fg);
-  padding:0.75rem 1.5rem;
-  background:var(--card-color);
-  font-family:var(--retro-font);
-  font-size:1rem;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-  transform: translateX(-26px);
-}
-
-.top-bar a:hover, .top-bar a.active{
-  background:var(--fg);
-  color:var(--bg);
-  box-shadow: var(--card-glow);
-}
-
-.card {
-  max-width: 760px;
-  width: 90%;
-  background: var(--card-color);
-  border-radius: 20px;
-  backdrop-filter: blur(6px);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; /* center content inside */
-  position: relative;
-  animation: float 6s ease-in-out infinite;
-  max-height: calc(100vh - 9rem); /* leave room for top bar + footer */
-  margin: 0;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-img.logo{
-  width:350px;
-  margin-bottom:1.5rem;
-  filter:drop-shadow(0 0 12px #3b1c70);
-  animation: logo-float 4s ease-in-out infinite;
-}
-
-@keyframes logo-float{
-  0%,100%{transform:translateY(0);}
-  50%{transform:translateY(-3px);}
-}
-
-h1{
-  margin:0 0 .75rem 0;
-  font-size:clamp(28px,6vw,56px);
-  color:var(--fg);
-  text-shadow:0 0 10px #3b1c70;
-  animation: retro-flicker 1.5s infinite;
-  text-align: center;
-}
-
-p{
-  margin:.25rem 0 1rem 0;
-  color:var(--muted);
-  font-size:clamp(14px,2.5vw,18px);
-  text-align: center;
-}
-
-#mission-btn{
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  padding:0.6rem 1.2rem;
-  border:2px solid var(--fg);
-  background:var(--card-color);
-  color:var(--fg);
-  font-family:var(--retro-font);
-  font-weight:bold;
-  cursor:pointer;
-  z-index:10;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-#mission-btn:hover, #mission-btn.active{
-  background:var(--fg);
-  color:var(--bg);
-  box-shadow: var(--card-glow);
-}
-
-.links a{
-  color:var(--fg);
-  text-decoration:none;
-  margin:0 .75rem;
-  padding:0.5rem 1rem;
-  border:2px solid var(--fg);
-  background:var(--card-color);
-  font-family:var(--retro-font);
-  font-size:14px;
-  font-weight:bold;
-  display:inline-block;
-  cursor:pointer;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-.links a:hover, .links a.active{
-  background:var(--fg);
-  color:var(--bg);
-  box-shadow: var(--card-glow);
-}
-
-#email{
-  margin-top:0.75rem;
-  color:var(--fg);
-  opacity:0;
-  pointer-events:none;
-  transition:opacity 0.3s ease;
-}
-
-#email.visible{
-  opacity:1;
-  pointer-events:auto;
-}
-
-.content-stack {
-  position:relative;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100%;
-}
-
-.card-content {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  height:100%;
-  transition:opacity 0.5s ease;
-  z-index:1;
-}
-
-.card-content.hidden { opacity:0; pointer-events:none; }
-
-.mission-text {
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  opacity:0;
-  transition:opacity 0.5s ease;
-  color:var(--fg);
-  text-align:center;
-  line-height:1.5;
-  font-size:clamp(14px,1.5vw,18px);
-  z-index:2;
-  white-space: normal;
-  word-wrap:break-word;
-  overflow: hidden;
-  animation: arcade-fade 0.5s ease-in-out forwards;
-}
-
-.mission-text.visible{ opacity:1; animation: arcade-fade 0.5s ease-in-out; }
-
-@keyframes arcade-fade{
-  0%{opacity:0; transform:scale(0.95);}
-  50%{opacity:1; transform:scale(1.02);}
-  100%{opacity:1; transform:scale(1);}
-}
-
-@keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff,0 0 8px #3b1c70,0 0 12px #3b1c70; }
-  20%, 24%, 55% { text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70; }
-}
-
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; }
-  50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; }
-}
-
-footer{
-  position: fixed; /* stick to bottom */
-  bottom: 1rem;
-  left: 0;
-  width: 100%;
-  text-align: center;
-  font-size: 12px;
-  color: var(--muted);
-  z-index: 10;
-}
-
-@media (max-width: 600px) {
-  body { overflow-y: auto; }
-  #page-wrapper { height: auto; padding-bottom: 3rem; }
-  .card { width: 95%; padding: 1.2rem; max-height: none; animation: none; }
-  img.logo { width: 160px; margin-bottom: 1rem; }
-  html, body { max-width:600px; overflow-x:hidden; }
-  .links a, #mission-btn { min-height: 36px; }
-  h1 { font-size: 16px; line-height: 1.4; }
-  p { font-size: 10px; line-height: 1.5; margin-bottom: 0.75rem; }
-  #mission-btn { top: 0.5rem; right: 0.5rem; padding: 0.4rem 0.8rem; font-size: 9px; }
-  .links a { font-size: 10px; padding: 0.4rem 0.8rem; margin: 0 0.4rem; }
-  .top-bar { flex-direction: column; gap: 0.5rem; padding: 0.5rem 0.25rem; position: static; background: rgba(0,0,0,0.5); }
-  .top-bar a { font-size: 10px; padding: 0.4rem 0.8rem; transform: none; }
-  footer { font-size: 9px; padding-bottom: 1rem; position: fixed; bottom: 1rem; }
-  .mission-text { font-size: 10px; line-height: 1.3; padding: 0.5rem; }
-}
+/* Index page specific overrides */
+#page-wrapper { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; overflow:hidden; }
+.card { max-width:760px; width:90%; border-radius:20px; padding:2rem; animation: float 6s ease-in-out infinite; position:relative; }
+@keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);} }
+img.logo { width:350px; margin-bottom:1.5rem; filter:drop-shadow(0 0 12px #3b1c70); animation: logo-float 4s ease-in-out infinite; }
+@keyframes logo-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
+h1 { text-align:center; margin:0 0 .75rem 0; font-size:clamp(28px,6vw,56px); color:var(--fg); text-shadow:0 0 10px #3b1c70; animation: retro-flicker 1.5s infinite; }
+p { text-align:center; margin:.25rem 0 1rem 0; color:var(--muted); font-size:clamp(14px,2.5vw,18px); }
+.links a { color:var(--fg); background:var(--card-color); padding:.5rem 1rem; border:2px solid var(--fg); margin:0 .75rem; display:inline-block; font-weight:bold; font-size:14px; transition:all 0.3s ease; }
+.links a:hover, .links a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow);}
+#email{margin-top:.75rem;color:var(--fg);opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
+#email.visible{opacity:1;pointer-events:auto;}
+.mission-text { position:absolute;top:0;left:0;width:100%;text-align:center;margin-top:1rem;font-size:14px;color:var(--fg);}
 </style>
 </head>
 <body>
 <div id="page-wrapper">
-  <div class="top-bar">
-    <a id="engineers-top" href="engineers.html">Engineers</a>
-    <a id="artists-top" href="artists.html">Artists</a>
-    <a id="songs-top" href="songs.html">Songs</a>
-  </div>
-  <div class="card" role="main">
-    <button id="mission-btn">Mission</button>
-    <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
-    <div class="content-stack">
-      <div class="card-content">
-        <h1>8 Bit Entertainment</h1>
-        <p>Mixing emotion and distortion, we engineer the imperfections that make music real.</p>
-        <div class="links">
-          <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
-          <a id="contact-link">Contact</a>
-        </div>
-        <div id="email">eightbit.ent@gmail.com</div>
-      </div>
-      <div class="mission-text"> </div>
+  <div class="card">
+    <img src="logo.png" alt="Logo" class="logo">
+    <h1>8 Bit Entertainment</h1>
+    <p>Innovating the pixelated world</p>
+    <div class="links">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a id="contact-btn">Contact</a>
     </div>
+    <div id="email">contact@8bitent.com</div>
   </div>
-  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
+  <div class="mission-text" id="mission"></div>
 </div>
+<script src="script.js"></script>
 <script>
-window.addEventListener('DOMContentLoaded', () => {
-  const contactLink = document.getElementById('contact-link');
-  const emailDiv = document.getElementById('email');
-  const missionBtn = document.getElementById('mission-btn');
-  const cardContent = document.querySelector('.card-content');
-  const missionText = document.querySelector('.mission-text');
-  let missionVisible = false;
-  let typingTimeout = null;
-  
-  contactLink.addEventListener('click', () => {
-    emailDiv.classList.toggle('visible');
-  });
-  
-  function typeMission(text, speed = 50) {
-    missionText.textContent = '';
-    missionText.style.opacity = 1;
-    missionText.style.whiteSpace = 'pre-wrap';
-    missionText.style.overflow = 'hidden';
-    missionText.style.animation = ''; // reset any previous pulse
-    
-    let i = 0;
-
-    function type() {
-      if (!missionVisible) return; // stop typing if mission hidden
-      if (i < text.length) {
-        missionText.textContent += text[i];
-        i++;
-        typingTimeout = setTimeout(type, speed);
-      } else {
-        missionText.style.animation = 'pulse 1.5s infinite';
-      }
-    }
-
-    type();
-  }
-  
-  missionBtn.addEventListener('click', () => {
-    missionVisible = !missionVisible;
-    clearTimeout(typingTimeout); // cancel any ongoing typing
-
-    if(missionVisible){
-      cardContent.classList.add('hidden');
-      missionText.classList.add('visible');
-      missionBtn.classList.add('active');
-      typeMission("8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic. We embrace the “low quality” that speaks to the soul, the rhythm that connects culture and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.", 20);
-    } else {
-      cardContent.classList.remove('hidden');
-      missionText.classList.remove('visible');
-      missionBtn.classList.remove('active');
-      missionText.style.animation = '';
-      missionText.style.opacity = '';
-      missionText.textContent = '';
-      missionText.style.whiteSpace = 'nowrap';
-      missionText.style.overflow = 'hidden';
-    }
-  });
-});
+// Mission typewriter effect
+const missionText="Welcome to the 8 Bit Entertainment universe! Explore music, artists, and engineers.";
+let i=0;function typeMission(){if(i<missionText.length){document.getElementById("mission").innerHTML+=missionText.charAt(i);i++;setTimeout(typeMission,50);}}
+typeMission();
 </script>
 </body>
 </html>
