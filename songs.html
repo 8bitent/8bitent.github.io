@@ -3,46 +3,67 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>SeektheLooper | Songs</title>
+<title>SeektheLooper | Portfolio</title>
 
+<!-- Google Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
 
 <style>
+/* === BODY & BACKGROUND === */
 body {
   margin: 0;
   min-height: 100vh;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
-  overflow-y: auto;
+  overflow-y: auto; /* make scrollable */
   color: #fff;
-  background-color: #000;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
+  background-color: #000; /* fallback */
 }
 
-/* GIF background */
+/* GIF background wrapper */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: url('wallpaper.gif') no-repeat center center fixed;
   background-size: cover;
   filter: brightness(0.3);
   z-index: -1;
+  pointer-events: none;
 }
 
-/* HEADER */
+/* vertical CD-style strip behind "Portfolio" */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 150px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* === HEADER === */
 header {
-  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 50px;
   z-index: 1;
+  width: 100%;
 }
 
+/* Beats button */
 .beats-button {
   background: transparent;
   border: 2px solid #00ffff;
@@ -64,59 +85,99 @@ header {
   box-shadow: 0 0 20px #00ffff;
 }
 
-/* Page Title */
+/* Title */
 .title {
   font-family: "Orbitron", sans-serif;
-  font-size: 4rem;
+  font-size: 5rem;
   color: #00ffff;
   text-align: center;
-  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 40px #00ffff;
   margin: 0;
-  animation: retro-flicker 1.5s infinite;
 }
 
-/* === SONG SECTIONS === */
-.song-section {
-  display: flex;
-  justify-content: center;
+/* === MAIN CONTENT === */
+.main-content {
+  display: flex;           /* stack vertically */
+  flex-direction: column;  /* vertical scroll */
   align-items: center;
-  flex-direction: column;
+  justify-content: center;
+  gap: 100px;              /* spacing between videos */
   width: 100%;
-  min-height: 100vh;
-  padding: 2rem 0;
-  scroll-snap-align: start; /* optional for smooth scroll snapping */
+  margin-bottom: 160px;
+  z-index: 1;
 }
 
+/* Side texts */
+.side-text.left {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 6rem;
+  font-weight: 900;
+  color: rgba(255,255,255,0.2);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) scaleY(1.2);
+  text-align: center;
+  justify-self: start;
+  margin-top: 0; /* removed offset */
+}
+
+.side-text.right {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: rgba(255,255,255,0.4);
+  writing-mode: vertical-rl;
+  transform: rotate(180deg) scaleY(1.2);
+  text-align: center;
+  justify-self: start;
+  margin-left: 50px;
+  margin-top: 0; /* removed offset */
+}
+
+.side-text.right .underline {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Video wrapper */
 .video-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
+/* Video */
 video {
   width: 80vmin;
-  max-width: 700px;
-  max-height: 80vh;
+  max-width: 600px;
+  max-height: 600px;
   border-radius: 10px;
   box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
   background-color: black;
   object-fit: cover;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
+/* Song title */
 .song-title {
   font-family: "Inter", sans-serif;
-  font-size: 1.2rem;
-  color: rgba(255,255,255,0.8);
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
   text-align: center;
+  margin-top: 10px;
   letter-spacing: 0.5px;
 }
 
+/* YouTube link */
 .youtube-link {
-  color: rgba(255,77,77,0.8);
-  text-decoration: none;
+  color: rgba(255,77,77,0.7);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
   font-weight: 600;
-  transition: opacity 0.2s ease;
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s ease, text-decoration 0.2s ease;
 }
 
 .youtube-link:hover {
@@ -126,37 +187,60 @@ video {
 
 /* Footer */
 footer {
-  margin-top: 50px;
-  margin-bottom: 30px;
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
   font-size: 0.9rem;
   color: rgba(255,255,255,0.4);
+  z-index: 1;
 }
 
-/* Retro Flicker */
-@keyframes retro-flicker {
-  0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 4px #fff,0 0 8px #00ffff,0 0 12px #00ffff; }
-  20%,24%,55% { text-shadow:0 0 2px #fff,0 0 4px #00ffff,0 0 6px #00ffff; }
-}
-
-/* Mobile adjustments */
+/* === MOBILE RESPONSIVENESS === */
 @media screen and (max-width: 900px) {
+  .side-text.left,
+  .side-text.right {
+    display: none;
+  }
   video {
-    width: 70vmin;
+    width: 60vmin;
   }
   .title {
-    font-size: 3rem;
+    font-size: 4rem;
+  }
+  .beats-button {
+    font-size: 1rem;
+    padding: 8px 20px;
   }
 }
 
 @media screen and (max-width: 600px) {
   video {
-    width: 60vmin;
+    width: 50vmin;
   }
   .title {
-    font-size: 2.5rem;
+    font-size: 3rem;
+  }
+
+  .main-content {
+    gap: 20px;
+  }
+  .video-wrapper {
+    width: 100%;
+    text-align: center;
   }
   .song-title {
-    font-size: 1rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .beats-button {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  body::after {
+    display: none !important;
   }
 }
 </style>
@@ -168,71 +252,102 @@ footer {
   <h1 class="title">Seek the Looper</h1>
 </header>
 
-<div class="song-section">
+<!-- First song -->
+<div class="main-content">
+  <div class="side-text left">Portfolio</div>
   <div class="video-wrapper">
     <video controls controlsList="nofullscreen" preload="metadata" poster="cover.jpg">
       <source src="Video.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
     <div class="song-title">
       Tiri - Jaila Busy Tme (Mixed & Mastered by Me)
-      <br>
+      <br />
       <a href="https://www.youtube.com/watch?v=LRCyn03um3o" target="_blank" class="youtube-link">Stream on YouTube</a>
     </div>
   </div>
+  <div class="side-text right">
+    <span class="underline">Mix</span>/<span class="underline">Master</span>
+  </div>
 </div>
 
-<div class="song-section">
+<!-- Second song -->
+<div class="main-content">
+  <div class="side-text left">Portfolio</div>
   <div class="video-wrapper">
     <video controls controlsList="nofullscreen" preload="metadata" poster="cover2.jpg">
       <source src="Emotions.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
     <div class="song-title">
       SeektheLooper - Emotions (Writer, Performer, Producer, Mixer, Master)
-      <br>
+      <br />
       <a href="https://www.youtube.com/watch?v=jCxLDvkrPbI" target="_blank" class="youtube-link">Stream on YouTube</a>
     </div>
   </div>
+  <div class="side-text right">
+    <span class="underline">Produce</span>/<span class="underline">Mix</span>/<span class="underline">Master</span>
+  </div>
 </div>
 
-<div class="song-section">
+<!-- Third song -->
+<div class="main-content">
+  <div class="side-text left">Portfolio</div>
   <div class="video-wrapper">
     <video controls controlsList="nofullscreen" preload="metadata" poster="cover3.jpg">
       <source src="lost.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
     <div class="song-title">
       SeektheLooper - I'm So Lost (Writer, Performer, Producer, Mixer, Master)
-      <br>
+      <br />
       <a href="https://www.youtube.com/watch?v=6KbBDFXOw5I" target="_blank" class="youtube-link">Stream on YouTube</a>
     </div>
   </div>
-</div>
-
-<div class="song-section">
-  <div class="video-wrapper">
-    <video controls controlsList="nofullscreen" preload="metadata" poster="cover4.jpg">
-      <source src="Million.mp4" type="video/mp4" />
-    </video>
-    <div class="song-title">
-      SeektheLooper - Million Things (Writer, Performer, Producer, Mixer, Master)
-      <br>
-      <a href="https://www.youtube.com/watch?v=7rCN0ODEQe8" target="_blank" class="youtube-link">Stream on YouTube</a>
-    </div>
+  <div class="side-text right">
+    <span class="underline">Produce</span>/<span class="underline">Mix</span>/<span class="underline">Master</span>
   </div>
 </div>
 
-<div class="song-section">
+<!-- Fourth song -->
+<div class="main-content">
+  <div class="side-text left">Portfolio</div>
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover4.jpg">
+      <source src="Million.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="song-title">
+      SeektheLooper - Million Things (Writer, Performer, Producer, Mixer, Master)
+      <br />
+      <a href="https://www.youtube.com/watch?v=7rCN0ODEQe8" target="_blank" class="youtube-link">Stream on YouTube</a>
+    </div>
+  </div>
+  <div class="side-text right">
+    <span class="underline">Produce</span>/<span class="underline">Mix</span>/<span class="underline">Master</span>
+  </div>
+</div>
+
+<!-- Fifth song -->
+<div class="main-content">
+  <div class="side-text left">Portfolio</div>
   <div class="video-wrapper">
     <video controls controlsList="nofullscreen" preload="metadata" poster="cover5.jpg">
       <source src="9030.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
     </video>
     <div class="song-title">
       SeektheLooper - 90:30 (Writer, Performer, Producer, Mixer, Master)
-      <br>
+      <br />
       <a href="https://youtu.be/Vr7cpULaBXA?si=75A2VObravjzX1hj" target="_blank" class="youtube-link">Stream on YouTube</a>
     </div>
+  </div>
+  <div class="side-text right">
+    <span class="underline">Produce</span>/<span class="underline">Mix</span>/<span class="underline">Master</span>
   </div>
 </div>
 
 <footer>seekthelooper@gmail.com</footer>
+
 </body>
 </html>
