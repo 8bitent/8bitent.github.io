@@ -18,6 +18,11 @@
   --retro-font: 'Press Start 2P', cursive;
 }
 
+/* Global cursor: League of Legends Pointer */
+* {
+  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
+}
+
 html, body {
   margin:0;
   height:100%;
@@ -27,20 +32,18 @@ html, body {
               url('pixel.gif') center/cover no-repeat;
   color:var(--fg);
   display:block;
-
-  /* Arcade Lightning Cursor */
-  cursor: url('https://cur.cursors-4u.net/cursors/cur-1/cur1.ani'),
-         url('https://cur.cursors-4u.net/cursors/cur-1/cur1.png'),
-         auto !important;
+  image-rendering: pixelated;
 }
 
 #page-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   min-height: 100vh;
   position: relative;
+  padding-top: none;
+  padding-bottom: none;
   overflow: hidden;
 }
 
@@ -86,10 +89,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   position: relative;
   animation: float 6s ease-in-out infinite;
-  max-height: calc(100vh - 9rem); 
+  max-height: calc(100vh - 9rem);
   margin: 0;
 }
 
@@ -136,7 +139,6 @@ p{
   color:var(--fg);
   font-family:var(--retro-font);
   font-weight:bold;
-  cursor:pointer;
   z-index:10;
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
@@ -158,7 +160,6 @@ p{
   font-size:14px;
   font-weight:bold;
   display:inline-block;
-  cursor:pointer;
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -238,8 +239,6 @@ p{
   20%, 24%, 55% { text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70; }
 }
 
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-
 @keyframes pulse {
   0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; }
   50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; }
@@ -299,6 +298,12 @@ footer{
   </div>
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
+
+<!-- Optional cursor preview link -->
+<a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
+  <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
+</a>
+
 <script>
 window.addEventListener('DOMContentLoaded', () => {
   const contactLink = document.getElementById('contact-link');
@@ -318,10 +323,9 @@ window.addEventListener('DOMContentLoaded', () => {
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
-    missionText.style.animation = ''; 
+    missionText.style.animation = ''; // reset pulse
     
     let i = 0;
-
     function type() {
       if (!missionVisible) return;
       if (i < text.length) {
@@ -332,13 +336,12 @@ window.addEventListener('DOMContentLoaded', () => {
         missionText.style.animation = 'pulse 1.5s infinite';
       }
     }
-
     type();
   }
   
   missionBtn.addEventListener('click', () => {
     missionVisible = !missionVisible;
-    clearTimeout(typingTimeout); 
+    clearTimeout(typingTimeout);
 
     if(missionVisible){
       cardContent.classList.add('hidden');
