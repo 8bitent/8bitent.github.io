@@ -141,11 +141,16 @@ html, body {
   margin-top:0; /* pushes video down */
 }
 .lightbox video{
-  max-width:90%;
-  max-height:90%;
+  max-width:70%;
+  max-height:70%;
   border:2px solid var(--fg);
   box-shadow: var(--card-glow);
 }
+  @media (max-width: 800px) {
+  .lightbox video {
+    max-width: 90%;
+    max-height: 60%;
+  }
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
