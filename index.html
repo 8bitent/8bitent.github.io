@@ -5,43 +5,33 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>8 Bit Entertainment</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<style>
-/* Index page specific overrides */
-#page-wrapper { display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; overflow:hidden; }
-.card { max-width:760px; width:90%; border-radius:20px; padding:2rem; animation: float 6s ease-in-out infinite; position:relative; }
-@keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-5px);} }
-img.logo { width:350px; margin-bottom:1.5rem; filter:drop-shadow(0 0 12px #3b1c70); animation: logo-float 4s ease-in-out infinite; }
-@keyframes logo-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-3px);}}
-h1 { text-align:center; margin:0 0 .75rem 0; font-size:clamp(28px,6vw,56px); color:var(--fg); text-shadow:0 0 10px #3b1c70; animation: retro-flicker 1.5s infinite; }
-p { text-align:center; margin:.25rem 0 1rem 0; color:var(--muted); font-size:clamp(14px,2.5vw,18px); }
-.links a { color:var(--fg); background:var(--card-color); padding:.5rem 1rem; border:2px solid var(--fg); margin:0 .75rem; display:inline-block; font-weight:bold; font-size:14px; transition:all 0.3s ease; }
-.links a:hover, .links a.active { background:var(--fg); color:var(--bg); box-shadow: var(--card-glow);}
-#email{margin-top:.75rem;color:var(--fg);opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
-#email.visible{opacity:1;pointer-events:auto;}
-.mission-text { position:absolute;top:0;left:0;width:100%;text-align:center;margin-top:1rem;font-size:14px;color:var(--fg);}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <div id="page-wrapper">
-  <div class="card">
-    <img src="logo.png" alt="Logo" class="logo">
-    <h1>8 Bit Entertainment</h1>
-    <p>Innovating the pixelated world</p>
-    <div class="links">
-      <a href="https://instagram.com" target="_blank">Instagram</a>
-      <a id="contact-btn">Contact</a>
-    </div>
-    <div id="email">contact@8bitent.com</div>
+  <div class="top-bar">
+    <a id="engineers-top" href="engineers.html">Engineers</a>
+    <a id="artists-top" href="artists.html">Artists</a>
+    <a id="songs-top" href="songs.html">Songs</a>
   </div>
-  <div class="mission-text" id="mission"></div>
+  <div class="card" role="main">
+    <button id="mission-btn">Mission</button>
+    <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
+    <div class="content-stack">
+      <div class="card-content">
+        <h1>8 Bit Entertainment</h1>
+        <p>Mixing emotion and distortion, we engineer the imperfections that make music real.</p>
+        <div class="links">
+          <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
+          <a id="contact-link">Contact</a>
+        </div>
+        <div id="email">eightbit.ent@gmail.com</div>
+      </div>
+      <div class="mission-text"> </div>
+    </div>
+  </div>
+  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
 <script src="script.js"></script>
-<script>
-// Mission typewriter effect
-const missionText="Welcome to the 8 Bit Entertainment universe! Explore music, artists, and engineers.";
-let i=0;function typeMission(){if(i<missionText.length){document.getElementById("mission").innerHTML+=missionText.charAt(i);i++;setTimeout(typeMission,50);}}
-typeMission();
-</script>
 </body>
 </html>
