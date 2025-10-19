@@ -77,7 +77,10 @@ html, body {
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
+/* Smooth retro fill-in hover for all nav buttons */
 .nav-right a:hover, .nav-left a:hover {
+  background: var(--fg); /* fill-in white */
+  color: var(--bg);       /* text turns black */
   box-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px #fff;
   transform: scale(1.05);
 }
@@ -99,7 +102,7 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 7rem 20rem; 
+  gap: 7rem 20rem;
   width: 95%;
   padding-bottom: 4rem;
   margin-top: 3rem;
@@ -222,14 +225,14 @@ footer{
 }
 
 @keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
-    text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70; 
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70;
   }
-  20%, 24%, 55% { 
-    text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70; 
+  20%, 24%, 55% {
+    text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70;
   }
 }
-  
+
 @media (max-width: 800px) {
   .top-bar { flex-direction: column; align-items: center; gap: 0.5rem; }
   .top-bar-title-container { position: static; transform: none; max-width: 100%; text-align: center; }
