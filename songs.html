@@ -49,30 +49,8 @@ html, body {
   z-index:10;
 }
 
-.nav-left {
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  z-index:11;
-}
-
-.nav-right {
-  display:flex;
-  align-items:center;
-  gap:2rem;
-  flex-shrink:0;
-  transform: translateX(-40px);
-}
-
-.page-title {
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  font-size:1rem;
-  font-weight:bold;
-  text-align:center;
-  z-index:10;
-}
+.nav-left { display:flex; align-items:center; }
+.nav-right { display:flex; align-items:center; gap:2rem; flex-shrink:0; transform: translateX(-40px); }
 
 .top-bar a{
   color:var(--fg);
@@ -85,36 +63,25 @@ html, body {
   font-family:var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
-
-/* 8-BIT HOMEBUTTON HOVER */
-.top-bar a:hover,
-.top-bar a.active {
+.top-bar a:hover {
   background: var(--card-color);
   color: var(--fg);
+  box-shadow: 0 0 4px #00ffff, 0 0 8px #00ffff, 0 0 12px #00ffff;
   transform: scale(1.05);
-  box-shadow: 
-    0 0 4px #00ffff, 
-    0 0 8px #00ffff, 
-    0 0 12px #00ffff;
   transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
 
-.logo-btn img:hover {
-  transform: scale(1.08);
+/* RETRO FLICKER EFFECT */
+@keyframes retro-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff,0 0 8px #00ffff,0 0 12px #00ffff; }
+  20%, 24%, 55% { text-shadow:0 0 2px #fff,0 0 4px #00ffff,0 0 6px #00ffff; }
 }
+.active-flicker { animation: retro-flicker 1.5s infinite; }
 
-.logo-btn {
-  border:none;
-  padding:0;
-  background:none;
-}
+/* PAGE TITLE */
+.page-title { font-family:var(--retro-font); font-size:2rem; margin-bottom:2rem; text-align:center; }
 
-.logo-btn img{
-  height:80px;
-  cursor:pointer;
-  transition: transform 0.3s ease;
-}
-
+/* SONG CONTAINER */
 .songs-container {
   display: flex;
   flex-wrap: wrap;
@@ -137,19 +104,10 @@ html, body {
   border: 2px solid var(--fg);
   transition: transform 0.2s, box-shadow 0.2s;
 }
+.song-item:hover { transform: scale(1.05); box-shadow: var(--card-glow); }
+.song-item img { width: 100%; height: 100%; object-fit: cover; image-rendering: pixelated; }
 
-.song-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--card-glow);
-}
-
-.song-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
-}
-
+/* LIGHTBOX */
 .lightbox{
   position:fixed;
   top:0; left:0;
@@ -164,30 +122,15 @@ html, body {
   transition:opacity 0.3s ease;
   padding-top: 10vh;
 }
-
-.lightbox.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.video-wrapper {
-  margin-top:0;
-}
-
+.lightbox.active{ opacity:1; visibility:visible; }
+.video-wrapper { margin-top:0; }
 .lightbox video{
   max-width:70%;
   max-height:70%;
   border:2px solid var(--fg);
-  box-shadow: var(--card-glow);
+  box-shadow: 0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
 }
-
-@media (max-width: 800px) {
-  .lightbox video {
-    max-width: 90%;
-    max-height: 60%;
-  }
-}
-
+@media (max-width: 800px) { .lightbox video { max-width: 90%; max-height: 60%; } }
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
@@ -203,27 +146,9 @@ footer{
   width:100%;
   text-align:center;
   font-size:12px;
-  color:var(--muted);
+  color:#b3b3cc;
   margin-top:auto;
   padding:1rem 0;
-}
-
-@media(max-width:600px){
-  .song-item{width:150px;height:150px;}
-  .logo-btn img{height:60px;}
-  .nav-right {gap:1rem;}
-}
-
-@media (max-width: 1000px) {
-  .song-item {
-    flex: 1 1 calc(33.33% - 2rem);
-  }
-}
-
-@media (max-width: 600px) {
-  .song-item {
-    flex: 1 1 calc(50% - 1rem);
-  }
 }
 </style>
 </head>
@@ -231,17 +156,16 @@ footer{
 <div id="page-wrapper">
   <div class="top-bar">
     <div class="nav-left">
-      <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
+      <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo" style="height:80px;"></a>
     </div>
-    
-    <div class="page-title">SONGS</div>
-    
     <div class="nav-right">
       <a href="engineers.html">Engineers</a>
       <a href="artists.html">Artists</a>
-      <a href="songs.html" class="active">Songs</a>
+      <a href="songs.html" id="songs-link">Songs</a>
     </div>
   </div>
+
+  <h1 class="page-title" id="page-title">Songs</h1>
 
   <div class="songs-container">
     <div class="song-item" data-video="Video.mp4">
@@ -260,33 +184,40 @@ footer{
 </div>
 
 <script>
-const songItems=document.querySelectorAll('.song-item');
-const lightbox=document.getElementById('lightbox');
-const video=document.getElementById('lightbox-video');
-const closeBtn=document.getElementById('close-lightbox');
+// Song lightbox logic
+const songItems = document.querySelectorAll('.song-item');
+const lightbox = document.getElementById('lightbox');
+const video = document.getElementById('lightbox-video');
+const closeBtn = document.getElementById('close-lightbox');
 
-songItems.forEach(item=>{
-  item.addEventListener('click',()=>{
-    const src=item.getAttribute('data-video');
-    video.src=src;
+songItems.forEach(item => {
+  item.addEventListener('click', () => {
+    video.src = item.getAttribute('data-video');
     video.play();
     lightbox.classList.add('active');
   });
 });
 
-closeBtn.addEventListener('click',()=>{
+closeBtn.addEventListener('click', () => {
   video.pause();
-  video.currentTime=0;
+  video.currentTime = 0;
   lightbox.classList.remove('active');
 });
 
-lightbox.addEventListener('click',e=>{
-  if(e.target===lightbox){
+lightbox.addEventListener('click', e => {
+  if(e.target === lightbox){
     video.pause();
-    video.currentTime=0;
+    video.currentTime = 0;
     lightbox.classList.remove('active');
   }
 });
+
+// Add retro flicker to active page link and title
+const currentPage = window.location.pathname.split("/").pop(); // get filename
+if(currentPage === "songs.html"){
+  document.getElementById('songs-link').classList.add('active-flicker');
+  document.getElementById('page-title').classList.add('active-flicker');
+}
 </script>
 </body>
 </html>
