@@ -13,7 +13,7 @@
   --card-color:rgba(26,26,64,0.25);
   --card-glow:0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
   --retro-font: 'Press Start 2P', cursive;
-  --bg-blur: 8px; /* <-- control background blur here */
+  --bg-blur: 8px;
 }
 
 html, body {
@@ -27,7 +27,6 @@ html, body {
   position:relative;
 }
 
-/* FULL PAGE BLUR BACKGROUND */
 body::before {
   content:"";
   position:fixed;
@@ -64,6 +63,12 @@ body::before {
 .nav-left {
   display:flex;
   align-items:center;
+  gap:1rem;
+}
+
+.page-title {
+  font-size:1rem;
+  font-weight:bold;
 }
 
 .nav-right {
@@ -86,9 +91,8 @@ body::before {
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* 8-BIT HOMEBUTTON HOVER */
-.top-bar a:hover,
-.top-bar a.active {
+/* Glow only on hover, not default active */
+.top-bar a:hover {
   background: var(--card-color);
   color: var(--fg);
   box-shadow: 
@@ -232,6 +236,7 @@ footer{
   <div class="top-bar">
     <div class="nav-left">
       <a href="index.html" class="logo-btn"><img src="logo.png" alt="8 Bit Entertainment Logo"></a>
+      <div class="page-title">SONGS</div>
     </div>
     <div class="nav-right">
       <a href="engineers.html">Engineers</a>
