@@ -37,8 +37,7 @@ html, body {
   background: rgba(0,0,0,0.25);
   box-sizing: border-box;
   z-index: 10;
-  border: 2px solid #fff;
-  animation: flicker-border 1.5s infinite;
+  border: 1px solid var(--fg);
   flex-wrap: wrap;
   backdrop-filter: blur(10px); /* stronger blur */
 }
@@ -71,8 +70,7 @@ html, body {
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid #fff;
-  animation: flicker-border 1.5s infinite;
+  border: 1px solid var(--fg);
   padding: 0.5rem 1rem;
   background: var(--card-color);
   font-family: var(--retro-font);
@@ -121,8 +119,7 @@ html, body {
   justify-content: center;
   align-items: center;
   background: var(--card-color);
-  border: 2px solid #fff;
-  animation: flicker-border 1.5s infinite;
+  border: 1px solid var(--fg);
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
@@ -186,8 +183,7 @@ html, body {
   width:100%;
   height:100%;
   object-fit:cover;
-  border: 2px solid #fff;
-  animation: flicker-border 1.5s infinite;
+  border: 1px solid var(--fg);
   box-shadow: 0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
 }
 
@@ -231,11 +227,7 @@ footer{
     text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70; 
   }
 }
-  @keyframes flicker-border {
-  0%, 20%, 40%, 60%, 80%, 100% { border-color: #fff; box-shadow: 0 0 4px #fff; }
-  10%, 30%, 50%, 70%, 90% { border-color: #ff00ff; box-shadow: 0 0 8px #ff00ff; }
-}
-
+  
 @media (max-width: 800px) {
   .top-bar { flex-direction: column; align-items: center; gap: 0.5rem; }
   .top-bar-title-container { position: static; transform: none; max-width: 100%; text-align: center; }
