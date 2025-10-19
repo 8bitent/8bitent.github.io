@@ -6,7 +6,7 @@
 <title>8 Bit Entertainment | ENGINEERS</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
-:root {
+:root{
   --bg:#000000;
   --fg:#ffffff;
   --muted:#b3b3cc;
@@ -25,7 +25,6 @@ html, body {
   flex-direction:column;
 }
 
-/* --- NAVBAR --- */
 .top-bar {
   position: sticky;
   top: 0;
@@ -71,22 +70,24 @@ html, body {
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid var(--fg);
-  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--fg);
+  padding: 0.5rem 1rem;
   background: var(--card-color);
   font-family: var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-right a:hover, .nav-left a:hover,
-.nav-right a.active, .nav-left a.active {
+.nav-right a:hover, .nav-left a:hover {
   background: var(--fg);
   color: var(--bg);
   box-shadow: var(--card-glow);
 }
 
-/* --- PAGE --- */
-#page-wrapper {
+.nav-right a.active {
+  animation: none;
+}
+
+#page-wrapper{
   flex: 1 0 auto;
   display: flex;
   flex-direction: column;
@@ -95,7 +96,6 @@ html, body {
   width: 100%;
 }
 
-/* --- ENGINEER GRID --- */
 .engineers-container {
   display: flex;
   flex-wrap: wrap;
@@ -113,10 +113,9 @@ html, body {
   max-width: 500px;
 }
 
-/* --- SQUARE TILE FIX (identical to songs.html) --- */
 .engineer-item {
   width: 100%;
-  aspect-ratio: 1/1; /* force perfect square */
+  aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,6 +124,7 @@ html, body {
   border-radius: 0;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
 }
 
 .engineer-item img {
@@ -147,8 +147,7 @@ html, body {
   color: var(--muted);
 }
 
-/* --- FOOTER --- */
-footer {
+footer{
   width:100%;
   text-align:center;
   font-size:12px;
@@ -157,7 +156,6 @@ footer {
   padding-bottom: 1rem;
 }
 
-/* --- LOGO --- */
 .logo-btn img {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   max-height: 95px;
@@ -170,7 +168,6 @@ footer {
   box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
 }
 
-/* --- RETRO FLICKER --- */
 @keyframes retro-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
     text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70;
@@ -180,7 +177,6 @@ footer {
   }
 }
 
-/* --- RESPONSIVE --- */
 @media (max-width: 800px) {
   .top-bar { flex-direction: column; align-items: center; gap: 0.5rem; }
   .top-bar-title-container { position: static; transform: none; max-width: 100%; text-align: center; }
@@ -221,14 +217,14 @@ footer {
       <div class="engineer-item">
         <img src="engineer1.jpg" alt="Engineer 1">
       </div>
-      <div class="engineer-name">SeektheLooper<br>Engineer</div>
+      <div class="engineer-name">SeektheLooper<br>Producer / Mixing Engineer</div>
     </div>
 
     <div class="engineer-card">
       <div class="engineer-item">
         <img src="engineer2.jpg" alt="Engineer 2">
       </div>
-      <div class="engineer-name">ASTRO<br>Engineer</div>
+      <div class="engineer-name">ASTRO<br>Audio Engineer / Sound Designer</div>
     </div>
   </div>
 
