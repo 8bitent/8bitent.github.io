@@ -306,6 +306,7 @@ window.addEventListener('DOMContentLoaded', () => {
   const cardContent = document.querySelector('.card-content');
   const missionText = document.querySelector('.mission-text');
   let missionVisible = false;
+  let typingTimeout = null;
   
   contactLink.addEventListener('click', () => {
     emailDiv.classList.toggle('visible');
@@ -316,21 +317,28 @@ window.addEventListener('DOMContentLoaded', () => {
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
+    missionText.style.animation = ''; // reset any previous pulse
+    
     let i = 0;
+
     function type() {
+      if (!missionVisible) return; // stop typing if mission hidden
       if (i < text.length) {
         missionText.textContent += text[i];
         i++;
-        setTimeout(type, speed);
+        typingTimeout = setTimeout(type, speed);
       } else {
         missionText.style.animation = 'pulse 1.5s infinite';
       }
     }
+
     type();
   }
   
   missionBtn.addEventListener('click', () => {
     missionVisible = !missionVisible;
+    clearTimeout(typingTimeout); // cancel any ongoing typing
+
     if(missionVisible){
       cardContent.classList.add('hidden');
       missionText.classList.add('visible');
@@ -343,7 +351,6 @@ window.addEventListener('DOMContentLoaded', () => {
       missionText.style.animation = '';
       missionText.style.opacity = '';
       missionText.textContent = '';
-      missionText.style.animation = '';
       missionText.style.whiteSpace = 'nowrap';
       missionText.style.overflow = 'hidden';
     }
