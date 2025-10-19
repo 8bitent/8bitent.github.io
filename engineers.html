@@ -15,6 +15,11 @@
   --retro-font: 'Press Start 2P', cursive;
 }
 
+/* Global cursor: League of Legends Pointer */
+* {
+  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
+}
+
 html, body {
   margin:0;
   min-height:100vh;
@@ -70,8 +75,8 @@ html, body {
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  border: 2px solid var(--fg);      /* 2px vs 1px in engineers */
-  padding: 0.75rem 1.5rem;          /* bigger padding than engineers */
+  border: 2px solid var(--fg);
+  padding: 0.75rem 1.5rem;
   background: var(--card-color);
   font-family: var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
@@ -111,8 +116,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 500px; /* or 500px to match desktop tiles exactly */
-  flex: 0 0 auto; /* prevent shrinking */
+  width: 500px;
+  flex: 0 0 auto;
 }
 
 .engineer-item {
@@ -126,7 +131,6 @@ html, body {
   border-radius: 0;
   overflow: hidden;
   transition: transform 0.2s, box-shadow 0.2s;
-  cursor: pointer;
 }
 
 .engineer-item img {
@@ -162,19 +166,19 @@ footer{
   max-height: 95px;
   width: auto;
   display: block;
-  animation: pulse 2s infinite ease-in-out; /* continuous pulsing by default */
+  animation: pulse 2s infinite ease-in-out;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .logo-btn img:hover {
-  animation-play-state: paused; /* stop pulsing on hover */
-  transform: scale(1.1);        /* stays zoomed in while hovered */
-  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70; /* glow stays on hover */
+  animation-play-state: paused;
+  transform: scale(1.1);
+  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
 }
 
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); } /* gently grows and shrinks */
+  50% { transform: scale(1.05); }
 }
 
 @keyframes retro-flicker {
@@ -221,36 +225,36 @@ footer{
     </div>
   </div>
 
- <div class="engineers-container">
-  <div class="engineer-card">
-    <div class="engineer-item">
-      <img src="engineer1.jpg" alt="Engineer 1">
+  <div class="engineers-container">
+    <div class="engineer-card">
+      <div class="engineer-item">
+        <img src="engineer1.jpg" alt="Engineer 1">
+      </div>
+      <div class="engineer-name">ASTRO<br>Engineer</div>
     </div>
-    <div class="engineer-name">ASTRO<br>Engineer</div>
-  </div>
 
-  <div class="engineer-card">
-    <div class="engineer-item">
-      <img src="engineer2.jpg" alt="Engineer 2">
+    <div class="engineer-card">
+      <div class="engineer-item">
+        <img src="engineer2.jpg" alt="Engineer 2">
+      </div>
+      <div class="engineer-name">SeektheLooper<br>Engineer</div>
     </div>
-    <div class="engineer-name">SeektheLooper<br>Engineer</div>
-  </div>
 
-  <div class="engineer-card">
-    <div class="engineer-item">
-      <img src="engineer2.jpg" alt="Engineer 2">
+    <div class="engineer-card">
+      <div class="engineer-item">
+        <img src="engineer3.jpg" alt="Engineer 3">
+      </div>
+      <div class="engineer-name">Tiri<br>Engineer</div>
     </div>
-    <div class="engineer-name">Tiri<br>Engineer</div>
   </div>
-</div>
-
-
-    
-  
-  
 
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
+
+<!-- Optional cursor preview link -->
+<a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
+  <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
+</a>
 
 </body>
 </html>
