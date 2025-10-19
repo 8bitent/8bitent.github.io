@@ -22,7 +22,7 @@ html, body {
   font-family:var(--retro-font);
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat fixed;
   color:var(--fg);
-  overflow: hidden; /* body won't scroll, content wrapper will */
+  overflow: hidden; /* scroll handled by wrapper */
   display:flex;
   flex-direction:column;
 }
@@ -49,7 +49,7 @@ html, body {
 .nav-right {
   display:flex;
   align-items:center;
-  gap:2rem; /* adjust to move buttons slightly */
+  gap:2rem;
 }
 
 .top-bar a{
@@ -89,41 +89,37 @@ html, body {
 
 /* ===== PAGE WRAPPER ===== */
 #page-wrapper{
-  flex: 1;                  /* fills remaining vertical space */
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top:8rem;         /* space for top bar */
-  overflow-y: auto;         /* scrollable content */
+  padding-top:8rem; /* space for fixed top bar */
+  overflow-y: auto;  /* scrollable content */
   width:100%;
 }
 
-/* ===== SONGS GRID ===== */
+/* ===== SONGS GRID: 1 VIDEO PER ROW ===== */
 .songs-container {
   display: flex;
-  flex-direction: column;   /* one per row */
+  flex-direction: column; /* one row per video */
   align-items: center;
   gap: 2rem;
   width: 95%;
+  padding-bottom: 2rem; /* space for footer */
 }
 
 .song-item {
   width: 100%;
-  max-width: 800px;         /* optional max width */
-  aspect-ratio: 16/9;       /* rectangle suitable for video covers */
-  background: var(--card-color);
+  max-width: 800px; /* desktop max width */
+  aspect-ratio: 16/9; /* rectangle shape */
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
+  background: var(--card-color);
+  border: 2px solid var(--fg);
   cursor: pointer;
   overflow: hidden;
-  border: 2px solid var(--fg);
   transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.song-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--card-glow);
 }
 
 .song-item img {
@@ -131,6 +127,11 @@ html, body {
   height: 100%;
   object-fit: cover;
   image-rendering: pixelated;
+}
+
+.song-item:hover {
+  transform: scale(1.05);
+  box-shadow: var(--card-glow);
 }
 
 /* ===== LIGHTBOX ===== */
@@ -189,7 +190,7 @@ footer{
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top: auto;  /* sticks footer to bottom */
+  margin-top: auto; /* sticky bottom */
 }
 
 /* ===== RETRO FLICKER ANIMATION ===== */
@@ -202,14 +203,13 @@ footer{
   }
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1000px) {
-  .song-item { max-width: 90%; }
-}
-
+/* ===== MOBILE RESPONSIVENESS ===== */
 @media (max-width: 600px) {
-  .song-item { max-width: 100%; }
-  .top-bar-title { font-size: 1.2rem; }
+  .song-item {
+    max-width: 100%;
+    aspect-ratio: 16/9;
+  }
+  .top-bar-title { font-size:1.2rem; }
 }
 </style>
 </head>
