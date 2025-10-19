@@ -27,21 +27,21 @@ html, body {
               url('pixel.gif') center/cover no-repeat;
   color:var(--fg);
   display:block;
-  /* Retro pixelated knife cursor */
-  cursor: url('knife.png') 16 16, auto;
-  image-rendering: pixelated; /* ensures crisp pixels */
+
+  /* Arcade Lightning Cursor */
+  cursor: url('https://cur.cursors-4u.net/cursors/cur-1/cur1.ani'),
+         url('https://cur.cursors-4u.net/cursors/cur-1/cur1.png'),
+         auto !important;
 }
 
 #page-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* vertical centering */
+  justify-content: center; 
   min-height: 100vh;
   position: relative;
-  padding-top: none;    /* space for top bar */
-  padding-bottom: none; /* optional space for footer */
-  overflow: hidden;     /* prevent scroll */
+  overflow: hidden;
 }
 
 .top-bar {
@@ -86,10 +86,10 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; /* center content inside */
+  justify-content: center; 
   position: relative;
   animation: float 6s ease-in-out infinite;
-  max-height: calc(100vh - 9rem); /* leave room for top bar + footer */
+  max-height: calc(100vh - 9rem); 
   margin: 0;
 }
 
@@ -246,7 +246,7 @@ p{
 }
 
 footer{
-  position: fixed; /* stick to bottom */
+  position: fixed;
   bottom: 1rem;
   left: 0;
   width: 100%;
@@ -318,12 +318,12 @@ window.addEventListener('DOMContentLoaded', () => {
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
-    missionText.style.animation = ''; // reset any previous pulse
+    missionText.style.animation = ''; 
     
     let i = 0;
 
     function type() {
-      if (!missionVisible) return; // stop typing if mission hidden
+      if (!missionVisible) return;
       if (i < text.length) {
         missionText.textContent += text[i];
         i++;
@@ -338,7 +338,7 @@ window.addEventListener('DOMContentLoaded', () => {
   
   missionBtn.addEventListener('click', () => {
     missionVisible = !missionVisible;
-    clearTimeout(typingTimeout); // cancel any ongoing typing
+    clearTimeout(typingTimeout); 
 
     if(missionVisible){
       cardContent.classList.add('hidden');
