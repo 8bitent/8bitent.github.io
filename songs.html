@@ -14,24 +14,28 @@
   --card-glow:0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
   --retro-font: 'Press Start 2P', cursive;
 }
+
 html, body {
   margin:0;
   height:100%;
   font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat fixed;
   color:var(--fg);
   display:flex;
   flex-direction:column;
+  overflow-x:hidden;
 }
+
 #page-wrapper{
   width:100%;
-  min-height:100vh;       /* full viewport height for sticky footer */
+  flex:1 0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:flex-start;
   padding-top:8rem;
 }
+
 .top-bar{
   width:100%;
   display:flex;
@@ -44,17 +48,20 @@ html, body {
   background:rgba(0,0,0,0.25);
   z-index:10;
 }
+
 .nav-left {
   display:flex;
   align-items:center;
 }
+
 .nav-right {
   display:flex;
   align-items:center;
-  gap:2rem; /* spacing between right buttons */
-  flex-shrink:0; /* prevent buttons from shrinking */  
-  transform: translateX(-40px); /* move entire group left */
+  gap:2rem;
+  flex-shrink:0;
+  transform: translateX(-40px);
 }
+
 .top-bar a{
   color:var(--fg);
   text-decoration:none;
@@ -66,22 +73,22 @@ html, body {
   font-family:var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
-/* ===================== */
+
 /* 8-BIT HOMEBUTTON HOVER */
-/* ===================== */
 .top-bar a:hover,
 .top-bar a.active {
-  background: var(--card-color); /* keep dark translucent */
-  color: var(--fg);              /* text/logo stays white */
+  background: var(--card-color);
+  color: var(--fg);
   box-shadow: 
     0 0 4px #00ffff, 
     0 0 8px #00ffff, 
-    0 0 12px #00ffff;           /* neon retro glow */
-  transform: scale(1.05);        /* slight bump animation */
+    0 0 12px #00ffff;
+  transform: scale(1.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
+
 .logo-btn img:hover {
-  transform: scale(1.08);  /* slightly stronger than normal links */
+  transform: scale(1.08);
 }
 
 .logo-btn {
@@ -89,24 +96,26 @@ html, body {
   padding:0;
   background:none;
 }
+
 .logo-btn img{
   height:80px;
   cursor:pointer;
   transition: transform 0.3s ease;
 }
+
 .songs-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 2rem;
   width: 95%;
-  margin-top: 4rem; /* breathing room below top bar */
+  margin-top: 4rem;
 }
-/* responsive, scalable video tiles */
+
 .song-item {
-  flex: 1 1 calc(20% - 2rem); /* 5 per row on wide screens */
-  max-width: 300px;           /* caps size on huge monitors */
-  aspect-ratio: 1 / 1;        /* keeps perfect squares */
+  flex: 1 1 calc(20% - 2rem);
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
   background: var(--card-color);
   display: flex;
   align-items: center;
@@ -128,6 +137,7 @@ html, body {
   object-fit: cover;
   image-rendering: pixelated;
 }
+
 .lightbox{
   position:fixed;
   top:0; left:0;
@@ -140,28 +150,32 @@ html, body {
   opacity:0;
   visibility:hidden;
   transition:opacity 0.3s ease;
-  padding-top: 10vh; /* pushes video down properly */
+  padding-top: 10vh;
 }
 
 .lightbox.active{
   opacity:1;
   visibility:visible;
 }
+
 .video-wrapper {
-  margin-top:0; /* pushes video down */
+  margin-top:0;
 }
+
 .lightbox video{
   max-width:70%;
   max-height:70%;
   border:2px solid var(--fg);
   box-shadow: var(--card-glow);
 }
+
 @media (max-width: 800px) {
   .lightbox video {
     max-width: 90%;
     max-height: 60%;
   }
 }
+
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
@@ -172,29 +186,31 @@ html, body {
   border:none;
   cursor:pointer;
 }
+
 footer{
   width:100%;
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top:auto; /* push footer to bottom */
+  margin-top:auto;
   padding:1rem 0;
 }
+
 @media(max-width:600px){
   .song-item{width:150px;height:150px;}
   .logo-btn img{height:60px;}
   .nav-right {gap:1rem;}
 }
-/* responsive behavior: fewer per row on smaller screens */
+
 @media (max-width: 1000px) {
   .song-item {
-    flex: 1 1 calc(33.33% - 2rem); /* 3 per row */
+    flex: 1 1 calc(33.33% - 2rem);
   }
 }
 
 @media (max-width: 600px) {
   .song-item {
-    flex: 1 1 calc(50% - 1rem); /* 2 per row */
+    flex: 1 1 calc(50% - 1rem);
   }
 }
 </style>
@@ -227,6 +243,7 @@ footer{
 
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
+
 <script>
 const songItems=document.querySelectorAll('.song-item');
 const lightbox=document.getElementById('lightbox');
