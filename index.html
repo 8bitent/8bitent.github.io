@@ -266,7 +266,7 @@ footer{
   #page-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; 
     align-items: center;
     min-height: 100vh;
     padding-top: calc(0.5rem + env(safe-area-inset-top));
@@ -274,33 +274,31 @@ footer{
     box-sizing: border-box;
   }
 
-  /* ===== MOBILE TOP BAR BUTTONS: 2 + 1 LAYOUT ===== */
   .top-bar {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.3rem;
-    padding: 0.5rem 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
     padding-top: calc(0.5rem + env(safe-area-inset-top));
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 1000;
   }
 
-  .top-bar a {
-    flex: 0 0 48%;      /* first two buttons ~ half-width */
-    text-align: center;
-    padding: 0.6rem 0;
-    font-size: 12px;
-    border-radius: 4px;
-    transform: none;
+  .top-bar .row {
+    display: flex;
+    gap: 0.5rem;
   }
 
-  .top-bar a:nth-child(3) {
-    flex: 0 0 100%;     /* third button full width */
-    margin-top: 0.3rem;
+  .top-bar a {
+    flex: 0 0 auto; /* prevent stretching */
+    min-width: 120px;
+    padding: 0.6rem 1.2rem;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 4px;
   }
 
   .card {
@@ -330,8 +328,10 @@ footer{
 <body>
 <div id="page-wrapper">
   <div class="top-bar">
-    <a id="engineers-top" href="engineers.html">Engineers</a>
-    <a id="artists-top" href="artists.html">Artists</a>
+    <div class="row">
+      <a id="engineers-top" href="engineers.html">Engineers</a>
+      <a id="artists-top" href="artists.html">Artists</a>
+    </div>
     <a id="songs-top" href="songs.html">Songs</a>
   </div>
   <div class="card" role="main">
@@ -376,7 +376,7 @@ window.addEventListener('DOMContentLoaded', () => {
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
-    missionText.style.animation = ''; 
+    missionText.style.animation = '';
     
     let i = 0;
     function type() {
