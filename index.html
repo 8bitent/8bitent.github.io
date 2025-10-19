@@ -45,20 +45,26 @@ html, body {
   overflow: hidden;
 }
 
+/* ===== TOP BAR ===== */
 .top-bar {
-  width:100%;
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  padding:1rem 0;
-  position:fixed;
-  top:0;
-  left:0;
-  background:rgba(0,0,0,0.25);
-  z-index:10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* left and right */
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0,0,0,0.25);
+  z-index: 10;
 }
 
-.top-bar a{
+.left-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.top-bar a {
   color:var(--fg);
   text-decoration:none;
   font-weight:bold;
@@ -70,10 +76,17 @@ html, body {
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-.top-bar a:hover, .top-bar a.active{
-  background:var(--fg);
-  color:var(--bg);
+.top-bar a:hover, .top-bar a.active {
+  background: var(--fg);
+  color: var(--bg);
   box-shadow: var(--card-glow);
+}
+
+/* Center button */
+.center-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .card {
@@ -254,12 +267,7 @@ footer{
 
 /* ===== MOBILE STYLES ===== */
 @media (max-width: 600px) {
-  html, body {
-    max-width: 600px;
-    height: 100%;
-    overflow: hidden;
-  }
-
+  html, body { max-width: 600px; height: 100%; overflow: hidden; }
   body { overflow-y: hidden; }
 
   #page-wrapper {
@@ -274,7 +282,6 @@ footer{
   }
 
   .top-bar {
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
@@ -286,18 +293,20 @@ footer{
     z-index: 1000;
   }
 
-  .top-bar .row {
-    display: flex;
+  .top-bar .left-buttons {
+    flex-direction: row;
     gap: 0.5rem;
   }
 
   .top-bar a {
-    flex: 0 0 auto; /* prevent stretching */
+    flex: 0 0 auto;
     min-width: 120px;
     padding: 0.6rem 1.2rem;
     font-size: 12px;
     text-align: center;
     border-radius: 4px;
+    position: static !important;
+    transform: none !important;
   }
 
   .card {
@@ -327,12 +336,13 @@ footer{
 <body>
 <div id="page-wrapper">
   <div class="top-bar">
-    <div class="row">
+    <div class="left-buttons">
       <a id="engineers-top" href="engineers.html">Engineers</a>
       <a id="artists-top" href="artists.html">Artists</a>
     </div>
-    <a id="songs-top" href="songs.html">Songs</a>
+    <a id="songs-top" href="songs.html" class="center-btn">Songs</a>
   </div>
+
   <div class="card" role="main">
     <button id="mission-btn">Mission</button>
     <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
@@ -349,6 +359,7 @@ footer{
       <div class="mission-text"> </div>
     </div>
   </div>
+
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
 
@@ -365,18 +376,18 @@ window.addEventListener('DOMContentLoaded', () => {
   const missionText = document.querySelector('.mission-text');
   let missionVisible = false;
   let typingTimeout = null;
-  
+
   contactLink.addEventListener('click', () => {
     emailDiv.classList.toggle('visible');
   });
-  
+
   function typeMission(text, speed = 50) {
     missionText.textContent = '';
     missionText.style.opacity = 1;
     missionText.style.whiteSpace = 'pre-wrap';
     missionText.style.overflow = 'hidden';
     missionText.style.animation = '';
-    
+
     let i = 0;
     function type() {
       if (!missionVisible) return;
@@ -390,7 +401,7 @@ window.addEventListener('DOMContentLoaded', () => {
     }
     type();
   }
-  
+
   missionBtn.addEventListener('click', () => {
     missionVisible = !missionVisible;
     clearTimeout(typingTimeout);
