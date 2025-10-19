@@ -27,18 +27,20 @@ html, body {
   flex-direction:column;
 }
 
-/* ===== TOP BAR ===== */
-.top-bar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:var(--scrollbar-width,0); /* 👈 this replaces width:100% */
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1rem 1rem;
-  background:rgba(0,0,0,0.25);
-  z-index:10;
+.top-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  background: rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  box-sizing: border-box;
+  max-width: 100vw;        /* prevents overflow into scrollbar */
+  overflow-x: clip;         /* ensures it can’t bleed past scrollbar */
 }
   
 .nav-left { display:flex; align-items:center; }
@@ -281,19 +283,5 @@ lightbox.addEventListener('click', e => {
   }
 });
 </script>
-  <script>
-// detect scrollbar width dynamically and store it in a CSS variable
-document.documentElement.style.setProperty(
-  "--scrollbar-width",
-  window.innerWidth - document.documentElement.clientWidth + "px"
-);
-window.addEventListener("resize", () => {
-  document.documentElement.style.setProperty(
-    "--scrollbar-width",
-    window.innerWidth - document.documentElement.clientWidth + "px"
-  );
-});
-</script>
-
 </body>
 </html>
