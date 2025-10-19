@@ -39,7 +39,7 @@ html, body {
   z-index: 10;
   border-bottom: 1px solid var(--fg);
   flex-wrap: wrap;
-  backdrop-filter: blur(10px); /* stronger blur */
+  backdrop-filter: blur(10px);
 }
 
 .top-bar-title-container {
@@ -99,7 +99,7 @@ html, body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 7rem 20rem; /* row gap | column gap */
+  gap: 7rem 20rem; 
   width: 95%;
   padding-bottom: 4rem;
   margin-top: 3rem;
@@ -185,7 +185,7 @@ html, body {
   height:100%;
   object-fit:cover;
   border: 3px dashed #fff;
-  border-radius: 0; /* keep it sharp */
+  border-radius: 0; 
   box-shadow: 0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
 }
 
@@ -301,7 +301,7 @@ footer{
   <div class="lightbox" id="lightbox">
     <button class="close-btn" id="close-lightbox">&times;</button>
     <div class="video-wrapper">
-      <video id="lightbox-video" controls autoplay></video>
+      <video id="lightbox-video" controls autoplay controlsList="nofullscreen"></video>
     </div>
   </div>
 
@@ -318,6 +318,7 @@ songItems.forEach(item => {
   item.addEventListener('click', () => {
     const src = item.getAttribute('data-video');
     video.src = src;
+    video.volume = 0.5;  // Set to 50% volume
     video.play();
     lightbox.classList.add('active');
   });
