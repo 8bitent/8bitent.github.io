@@ -18,7 +18,7 @@
 /* ===== BODY ===== */
 html, body {
   margin:0;
-  min-height:100%;
+  min-height:100vh; /* full viewport height for sticky footer */
   font-family:var(--retro-font);
   background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat fixed;
   color:var(--fg);
@@ -94,22 +94,19 @@ html, body {
 
 /* ===== PAGE WRAPPER ===== */
 #page-wrapper{
-  flex: 1;
+  flex: 1 0 auto; /* allows footer to stick to bottom */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
-  padding-bottom:1rem;
   width: 100%;
-  overflow-y: auto;
-  scrollbar-gutter: stable both-edges;
 }
 
 /* ===== SONGS GRID (3 per row) ===== */
 .songs-container {
   display: flex;
-  flex-wrap: wrap;           /* allow multiple rows */
-  justify-content: center;    /* center rows */
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 2rem;
   width: 95%;
   padding-bottom: 4rem;
@@ -117,8 +114,8 @@ html, body {
 }
 
 .song-item {
-  flex: 1 1 calc(33.333% - 1.33rem); /* 3 per row with gaps */
-  max-width: 500px;                  /* optional maximum width */
+  flex: 1 1 calc(33.333% - 1.33rem);
+  max-width: 500px;
   aspect-ratio: 1/1;
   display: flex;
   justify-content: center;
@@ -196,8 +193,10 @@ footer{
   font-size:12px;
   color:var(--muted);
   margin-top:auto;
+  padding-bottom: 1rem; /* 1rem from bottom */
 }
 
+/* ===== FLICKER ===== */
 @keyframes retro-flicker {
   0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { 
     text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70; 
@@ -223,7 +222,7 @@ footer{
   .top-bar-title { font-size: 1.4rem; }
   .lightbox video { max-width: 90%; max-height: 90%; }
   .song-item {
-    flex: 1 1 100%;    /* 1 per row on mobile */
+    flex: 1 1 100%;
     max-width: 100%;
   }
 }
