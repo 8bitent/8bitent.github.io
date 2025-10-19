@@ -110,7 +110,8 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 500px;
+  width: 300px; /* or 500px to match desktop tiles exactly */
+  flex: 0 0 auto; /* prevent shrinking */
 }
 
 .engineer-item {
