@@ -257,7 +257,7 @@ footer{
 
 @media (max-width: 600px) {
   body { overflow-y: auto; }
-  #page-wrapper { height: auto; padding-bottom: 3rem; }
+  #page-wrapper { height: auto; padding-bottom: 1rem; padding-top:calc(3rem+env(safe-area-inset-top)); }
   .card { width: 85%; padding: 1.2rem; max-height: none; animation: none; min-height:300px; height:auto;}
   img.logo { width: 160px; margin-bottom: 1rem; }
   html, body { max-width:600px; overflow-x:hidden; }
