@@ -25,7 +25,7 @@ html, body {
 }
 #page-wrapper{
   width:100%;
-  flex:1;
+  min-height:100vh;       /* full viewport height for sticky footer */
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -66,11 +66,24 @@ html, body {
   font-family:var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
-.top-bar a:hover, .top-bar a.active{
-  background:var(--fg);
-  color:var(--bg);
-  box-shadow: var(--card-glow);
+/* ===================== */
+/* 8-BIT HOMEBUTTON HOVER */
+/* ===================== */
+.top-bar a:hover,
+.top-bar a.active {
+  background: var(--card-color); /* keep dark translucent */
+  color: var(--fg);              /* text/logo stays white */
+  box-shadow: 
+    0 0 4px #00ffff, 
+    0 0 8px #00ffff, 
+    0 0 12px #00ffff;           /* neon retro glow */
+  transform: scale(1.05);        /* slight bump animation */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; 
 }
+.logo-btn img:hover {
+  transform: scale(1.08);  /* slightly stronger than normal links */
+}
+
 .logo-btn {
   border:none;
   padding:0;
@@ -80,9 +93,6 @@ html, body {
   height:80px;
   cursor:pointer;
   transition: transform 0.3s ease;
-}
-.logo-btn img:hover{
-  transform: scale(1.05);
 }
 .songs-container {
   display: flex;
@@ -146,11 +156,12 @@ html, body {
   border:2px solid var(--fg);
   box-shadow: var(--card-glow);
 }
-  @media (max-width: 800px) {
+@media (max-width: 800px) {
   .lightbox video {
     max-width: 90%;
     max-height: 60%;
   }
+}
 .lightbox .close-btn{
   position:absolute;
   top:1rem;
@@ -166,7 +177,7 @@ footer{
   text-align:center;
   font-size:12px;
   color:var(--muted);
-  margin-top:auto;
+  margin-top:auto; /* push footer to bottom */
   padding:1rem 0;
 }
 @media(max-width:600px){
@@ -174,7 +185,7 @@ footer{
   .logo-btn img{height:60px;}
   .nav-right {gap:1rem;}
 }
-  /* responsive behavior: fewer per row on smaller screens */
+/* responsive behavior: fewer per row on smaller screens */
 @media (max-width: 1000px) {
   .song-item {
     flex: 1 1 calc(33.33% - 2rem); /* 3 per row */
