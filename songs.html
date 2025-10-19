@@ -1,288 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>8 Bit Entertainment | Songs</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>SeektheLooper | Songs</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
 <style>
-:root{
-  --bg:#000000;
-  --fg:#ffffff;
-  --muted:#b3b3cc;
-  --card-color:rgba(26,26,64,0.25);
-  --card-glow:0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
-  --retro-font: 'Press Start 2P', cursive;
-}
-
-/* ===== BODY ===== */
-html, body {
-  margin:0;
-  height:100%;
-  font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('pixel.gif') center/cover no-repeat fixed;
-  color:var(--fg);
-  overflow-x:hidden;
-  display:flex;
-  flex-direction:column;
-}
-
-/* ===== TOP BAR ===== */
-.top-bar{
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:1rem 1rem;
-  position:fixed;
-  top:0;
-  left:0;
-  background:rgba(0,0,0,0.25);
-  z-index:10;
-}
-
-.nav-left {
-  display:flex;
-  align-items:center;
-}
-
-.nav-right {
-  display:flex;
-  align-items:center;
-  gap:2rem;
-}
-
-.top-bar a{
-  color:var(--fg);
-  text-decoration:none;
-  font-weight:bold;
-  font-size:1rem;
-  border:2px solid var(--fg);
-  padding:0.5rem 1rem;
-  background:var(--card-color);
-  font-family:var(--retro-font);
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-.top-bar a:hover {
-  background: var(--card-color);
-  color: var(--fg);
-  box-shadow: 0 0 4px #00ffff, 0 0 8px #00ffff, 0 0 12px #00ffff;
-  transform: scale(1.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-/* Active page button */
-.top-bar a.active {
-  animation: retro-flicker 1.5s infinite;
-}
-
-/* Centered page title */
-.top-bar-title {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: var(--retro-font);
-  font-size: 1.5rem;
-  color: var(--fg);
-  pointer-events: none;
-  animation: retro-flicker 1.5s infinite;
-}
-
-/* ===== SONGS GRID ===== */
-#page-wrapper{
-  width:100%;
-  padding-top:6rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-
-.songs-container {
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  overflow-x: hidden;
+  overflow-y: auto;
+  color: #fff;
+  background-color: #000;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2rem;
-  width: 95%;
-}
-
-.song-item {
-  flex: 1 1 calc(20% - 2rem);
-  max-width: 300px;
-  aspect-ratio: 1 / 1;
-  background: var(--card-color);
-  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  overflow: hidden;
-  border: 2px solid var(--fg);
-  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-.song-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--card-glow);
+/* GIF background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('wallpaper.gif') no-repeat center center fixed;
+  background-size: cover;
+  filter: brightness(0.3);
+  z-index: -1;
 }
 
-.song-item img {
+/* HEADER */
+header {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+  z-index: 1;
 }
 
-/* ===== LIGHTBOX ===== */
-.lightbox{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  z-index:50;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity 0.3s ease;
-  padding-top: 10vh;
+.beats-button {
+  background: transparent;
+  border: 2px solid #00ffff;
+  color: #00ffff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
 }
 
-.lightbox.active{
-  opacity:1;
-  visibility:visible;
+.beats-button:hover {
+  background: #00ffff;
+  color: #0d0d0d;
+  box-shadow: 0 0 20px #00ffff;
+}
+
+/* Page Title */
+.title {
+  font-family: "Orbitron", sans-serif;
+  font-size: 4rem;
+  color: #00ffff;
+  text-align: center;
+  text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 20px #00ffff;
+  margin: 0;
+  animation: retro-flicker 1.5s infinite;
+}
+
+/* === SONG SECTIONS === */
+.song-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem 0;
+  scroll-snap-align: start; /* optional for smooth scroll snapping */
 }
 
 .video-wrapper {
-  margin-top:0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.lightbox video{
-  max-width:70%;
-  max-height:70%;
-  border:2px solid var(--fg);
-  box-shadow: 0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
+video {
+  width: 80vmin;
+  max-width: 700px;
+  max-height: 80vh;
+  border-radius: 10px;
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+  background-color: black;
+  object-fit: cover;
+  margin-bottom: 15px;
 }
 
-@media (max-width: 800px) {
-  .lightbox video {
-    max-width: 90%;
-    max-height: 60%;
-  }
+.song-title {
+  font-family: "Inter", sans-serif;
+  font-size: 1.2rem;
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
-/* Close button */
-.lightbox .close-btn{
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  font-size:2rem;
-  color:var(--fg);
-  background:transparent;
-  border:none;
-  cursor:pointer;
+.youtube-link {
+  color: rgba(255,77,77,0.8);
+  text-decoration: none;
+  font-weight: 600;
+  transition: opacity 0.2s ease;
 }
 
-/* ===== FOOTER ===== */
-footer{
-  width:100%;
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:2rem;
+.youtube-link:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
-/* ===== RETRO FLICKER ANIMATION ===== */
+/* Footer */
+footer {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.4);
+}
+
+/* Retro Flicker */
 @keyframes retro-flicker {
-  0%,19%,21%,23%,25%,54%,56%,100% {
-    text-shadow:0 0 4px #fff,0 0 8px #00ffff,0 0 12px #00ffff;
+  0%,19%,21%,23%,25%,54%,56%,100% { text-shadow:0 0 4px #fff,0 0 8px #00ffff,0 0 12px #00ffff; }
+  20%,24%,55% { text-shadow:0 0 2px #fff,0 0 4px #00ffff,0 0 6px #00ffff; }
+}
+
+/* Mobile adjustments */
+@media screen and (max-width: 900px) {
+  video {
+    width: 70vmin;
   }
-  20%,24%,55% {
-    text-shadow:0 0 2px #fff,0 0 4px #00ffff,0 0 6px #00ffff;
+  .title {
+    font-size: 3rem;
   }
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 1000px) {
-  .song-item { flex: 1 1 calc(33.33% - 2rem); }
-}
-
-@media (max-width: 600px) {
-  .song-item { flex: 1 1 calc(50% - 1rem); }
-  .top-bar-title { font-size: 1.2rem; }
+@media screen and (max-width: 600px) {
+  video {
+    width: 60vmin;
+  }
+  .title {
+    font-size: 2.5rem;
+  }
+  .song-title {
+    font-size: 1rem;
+  }
 }
 </style>
 </head>
 <body>
 
-<div id="page-wrapper">
+<header>
+  <button class="beats-button" onclick="window.open('https://www.youtube.com/@SeekTheLooper/videos','_blank')">🔗 Beats</button>
+  <h1 class="title">Seek the Looper</h1>
+</header>
 
-  <div class="top-bar">
-    <div class="nav-left">
-      <a href="index.html" class="logo-btn"><img src="logo.png" alt="Logo" style="height:80px;"></a>
-    </div>
-
-    <!-- Centered page title -->
-    <div class="top-bar-title">Songs</div>
-
-    <div class="nav-right">
-      <a href="engineers.html">Engineers</a>
-      <a href="artists.html">Artists</a>
-      <a href="songs.html" class="active">Songs</a>
-    </div>
-  </div>
-
-  <div class="songs-container">
-    <div class="song-item" data-video="Video1.mp4">
-      <img src="cover1.jpg" alt="Song 1">
-    </div>
-    <div class="song-item" data-video="Video2.mp4">
-      <img src="cover2.jpg" alt="Song 2">
-    </div>
-    <div class="song-item" data-video="Video3.mp4">
-      <img src="cover3.jpg" alt="Song 3">
+<div class="song-section">
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover.jpg">
+      <source src="Video.mp4" type="video/mp4" />
+    </video>
+    <div class="song-title">
+      Tiri - Jaila Busy Tme (Mixed & Mastered by Me)
+      <br>
+      <a href="https://www.youtube.com/watch?v=LRCyn03um3o" target="_blank" class="youtube-link">Stream on YouTube</a>
     </div>
   </div>
-
-  <div class="lightbox" id="lightbox">
-    <button class="close-btn" id="close-lightbox">&times;</button>
-    <div class="video-wrapper">
-      <video id="lightbox-video" controls autoplay></video>
-    </div>
-  </div>
-
-  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
 
-<script>
-const songItems=document.querySelectorAll('.song-item');
-const lightbox=document.getElementById('lightbox');
-const video=document.getElementById('lightbox-video');
-const closeBtn=document.getElementById('close-lightbox');
+<div class="song-section">
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover2.jpg">
+      <source src="Emotions.mp4" type="video/mp4" />
+    </video>
+    <div class="song-title">
+      SeektheLooper - Emotions (Writer, Performer, Producer, Mixer, Master)
+      <br>
+      <a href="https://www.youtube.com/watch?v=jCxLDvkrPbI" target="_blank" class="youtube-link">Stream on YouTube</a>
+    </div>
+  </div>
+</div>
 
-songItems.forEach(item=>{
-  item.addEventListener('click',()=>{
-    const src=item.getAttribute('data-video');
-    video.src=src;
-    video.play();
-    lightbox.classList.add('active');
-  });
-});
+<div class="song-section">
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover3.jpg">
+      <source src="lost.mp4" type="video/mp4" />
+    </video>
+    <div class="song-title">
+      SeektheLooper - I'm So Lost (Writer, Performer, Producer, Mixer, Master)
+      <br>
+      <a href="https://www.youtube.com/watch?v=6KbBDFXOw5I" target="_blank" class="youtube-link">Stream on YouTube</a>
+    </div>
+  </div>
+</div>
 
-closeBtn.addEventListener('click',()=>{
-  video.pause();
-  video.currentTime=0;
-  lightbox.classList.remove('active');
-});
+<div class="song-section">
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover4.jpg">
+      <source src="Million.mp4" type="video/mp4" />
+    </video>
+    <div class="song-title">
+      SeektheLooper - Million Things (Writer, Performer, Producer, Mixer, Master)
+      <br>
+      <a href="https://www.youtube.com/watch?v=7rCN0ODEQe8" target="_blank" class="youtube-link">Stream on YouTube</a>
+    </div>
+  </div>
+</div>
 
-lightbox.addEventListener('click',e=>{
-  if(e.target===lightbox){
-    video.pause();
-    video.currentTime=0;
-    lightbox.classList.remove('active');
-  }
-});
-</script>
+<div class="song-section">
+  <div class="video-wrapper">
+    <video controls controlsList="nofullscreen" preload="metadata" poster="cover5.jpg">
+      <source src="9030.mp4" type="video/mp4" />
+    </video>
+    <div class="song-title">
+      SeektheLooper - 90:30 (Writer, Performer, Producer, Mixer, Master)
+      <br>
+      <a href="https://youtu.be/Vr7cpULaBXA?si=75A2VObravjzX1hj" target="_blank" class="youtube-link">Stream on YouTube</a>
+    </div>
+  </div>
+</div>
 
+<footer>seekthelooper@gmail.com</footer>
 </body>
 </html>
