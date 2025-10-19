@@ -306,16 +306,29 @@ footer{
 </div>
 
 <script>
+/* Lightbox logic (unchanged, only adapted to keep song-info behavior) */
 const songItems = document.querySelectorAll('.song-item');
 const lightbox = document.getElementById('lightbox');
 const video = document.getElementById('lightbox-video');
 const closeBtn = document.getElementById('close-lightbox');
 
 songItems.forEach(item => {
-  item.addEventListener('click', () => {
+  // populate info from data attributes (keeps markup easy to manage)
+  const title = item.dataset.title;
+  const link = item.dataset.link;
+  const titleElem = item.querySelector('.song-title');
+  const linkElem = item.querySelector('.stream-link');
+  if (title && titleElem) titleElem.textContent = title;
+  if (link && linkElem) linkElem.href = link;
+
+  // open video in lightbox
+  item.addEventListener('click', (e) => {
+    // if user clicks the stream link, don't open the lightbox
+    if (e.target.closest('.stream-link')) return;
     const src = item.getAttribute('data-video');
+    if (!src) return;
     video.src = src;
-    video.play();
+    video.play().catch(()=>{/* autoplay blocked maybe */});
     lightbox.classList.add('active');
   });
 });
@@ -327,7 +340,7 @@ closeBtn.addEventListener('click', () => {
 });
 
 lightbox.addEventListener('click', e => {
-  if(e.target === lightbox){
+  if (e.target === lightbox) {
     video.pause();
     video.currentTime = 0;
     lightbox.classList.remove('active');
