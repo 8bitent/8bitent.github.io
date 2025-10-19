@@ -274,10 +274,12 @@ footer{
     box-sizing: border-box;
   }
 
+  /* ===== MOBILE TOP BAR BUTTONS FIXED ===== */
   .top-bar {
-    flex-direction: column;
+    flex-direction: row; /* side by side */
+    justify-content: space-around;
     gap: 0.5rem;
-    padding: 0.5rem 0.25rem;
+    padding: 0.5rem;
     padding-top: calc(0.5rem + env(safe-area-inset-top));
     position: fixed;
     top: 0;
@@ -288,8 +290,12 @@ footer{
   }
 
   .top-bar a {
-    font-size: 10px;
-    padding: 0.4rem 0.8rem;
+    font-size: 12px;
+    padding: 0.6rem 1.2rem; /* taller & wider */
+    min-width: 120px; /* wider buttons */
+    flex: 1; /* all buttons equal width */
+    text-align: center;
+    border-radius: 4px; /* subtle retro blocky look */
     transform: none;
   }
 
@@ -343,7 +349,6 @@ footer{
   <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
 </div>
 
-<!-- Optional cursor preview link -->
 <a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
   <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
 </a>
