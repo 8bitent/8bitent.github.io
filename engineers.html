@@ -70,14 +70,15 @@ html, body {
   text-decoration: none;
   font-weight: bold;
   font-size: 1rem;
-  border: 1px solid var(--fg);
-  padding: 0.5rem 1rem;
+  border: 2px solid var(--fg);      /* 2px vs 1px in engineers */
+  padding: 0.75rem 1.5rem;          /* bigger padding than engineers */
   background: var(--card-color);
   font-family: var(--retro-font);
   transition: all 0.3s ease, box-shadow 0.3s ease;
 }
 
-.nav-right a:hover, .nav-left a:hover {
+.nav-right a:hover, .nav-left a:hover,
+.nav-right a.active, .nav-left a.active {
   background: var(--fg);
   color: var(--bg);
   box-shadow: var(--card-glow);
