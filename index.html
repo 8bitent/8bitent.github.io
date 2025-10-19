@@ -30,15 +30,15 @@ html, body {
 }
 
 #page-wrapper {
-  width:100%;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  position:relative;
-  padding-top:11rem; /* space for fixed top bar */
-  overflow:hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* vertical centering */
+  min-height: 100vh;
+  position: relative;
+  padding-top: 6rem;    /* space for top bar */
+  padding-bottom: 3rem; /* optional space for footer */
+  overflow: hidden;     /* prevent scroll */
 }
 
 .top-bar {
@@ -74,22 +74,20 @@ html, body {
 }
 
 .card {
-  max-width:760px;
-  width:90%;
-  background:var(--card-color);
-  border-radius:20px;
+  max-width: 760px;
+  width: 90%;
+  background: var(--card-color);
+  border-radius: 20px;
   backdrop-filter: blur(6px);
-  padding:2rem;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:flex-start;
-  position:relative;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* center content inside */
+  position: relative;
   animation: float 6s ease-in-out infinite;
-  z-index:5;
-  overflow:hidden;
-  max-height:calc(100vh - 6rem); /* prevent overflow */
-  margin-top:0;
+  max-height: calc(100vh - 9rem); /* leave room for top bar + footer */
+  margin: 0;
 }
 
 @keyframes float {
