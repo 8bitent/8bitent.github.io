@@ -28,11 +28,11 @@ html, body {
 
 /* ===== TOP BAR ===== */
 .top-bar {
-  position: sticky;       /* sticky instead of fixed */
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
-  max-width: 100vw;       /* prevent bleeding into scrollbar */
+  max-width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,14 +45,21 @@ html, body {
   gap: 1rem;
 }
 
+/* ===== TITLE FIX ===== */
+.top-bar-title-container {
+  width: 100%;
+  max-width: 600px; /* aligns with video column */
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
 .top-bar-title {
   font-family: var(--retro-font);
   font-size: 2.5rem;
   color: var(--fg);
-  text-align: center;
-  flex: 1 1 auto;
   animation: retro-flicker 1.5s infinite;
-  margin-left: 20rem; /* visually aligns with video column */
+  margin: 0;
 }
 
 /* Navigation */
@@ -105,8 +112,7 @@ html, body {
   gap: 2rem;
   width: 95%;
   padding-bottom: 4rem;
-  margin-top: 3rem; /* <-- adds space from top bar */
-  
+  margin-top: 3rem;
 }
 
 .song-item {
@@ -211,6 +217,12 @@ footer{
     justify-content: center;
     flex-wrap: wrap;
   }
+  .top-bar-title-container {
+    max-width: 100%;
+    text-align: center;
+    margin-left: 0;
+    margin-right: 0;
+  }
   .top-bar-title { font-size: 1.4rem; }
   .lightbox video { max-width: 90%; max-height: 90%; }
 }
@@ -219,7 +231,6 @@ footer{
   .song-item { max-width: 100%; aspect-ratio: 1/1; }
   .top-bar-title { font-size:1.2rem; }
 }
-
 </style>
 </head>
 <body>
@@ -231,7 +242,9 @@ footer{
       <a href="index.html" class="logo-btn"><img src="logo.png" alt="Logo" style="height:60px;"></a>
     </div>
 
-    <div class="top-bar-title">Songs</div>
+    <div class="top-bar-title-container">
+      <div class="top-bar-title">Songs</div>
+    </div>
 
     <div class="nav-right">
       <a href="engineers.html">Engineers</a>
