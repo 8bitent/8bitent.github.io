@@ -48,7 +48,7 @@ html, body {
 /* ===== TOP BAR ===== */
 .top-bar {
   display: grid;
-  grid-template-columns: 1fr auto 1fr; /* left | center | right */
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
   align-items: center;
   padding: 1rem 2rem;
   position: fixed;
@@ -59,13 +59,12 @@ html, body {
   z-index: 10;
 }
 
-.top-bar .left-buttons {
+.top-bar .left-buttons,
+.top-bar .center-btn,
+.top-bar .right-buttons {
   display: flex;
+  justify-content: center; /* center buttons in their column */
   gap: 1rem;
-}
-
-.top-bar .center-btn {
-  justify-self: center;
 }
 
 .top-bar a{
@@ -266,20 +265,23 @@ footer{
 /* ===== MOBILE ===== */
 @media (max-width: 600px) {
   .top-bar {
-    grid-template-columns: 1fr; /* stack all buttons */
-    justify-items: center;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
     gap: 0.5rem;
     padding-top: calc(0.5rem + env(safe-area-inset-top));
   }
 
-  .top-bar .left-buttons, .top-bar .center-btn {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
+  .top-bar a:nth-child(3) {
+    grid-column: 1 / -1; /* last button on its own row */
   }
 
-  .top-bar a { flex: 0 0 auto; min-width: 80px; font-size: 12px; padding: 0.4rem 0.8rem; }
+  .top-bar a {
+    flex: 0 0 auto;
+    min-width: 80px;
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+  }
 }
 </style>
 </head>
@@ -288,10 +290,13 @@ footer{
   <div class="top-bar">
     <div class="left-buttons">
       <a id="engineers-top" href="engineers.html">Engineers</a>
+    </div>
+    <div class="center-btn">
+      <a id="songs-top" href="songs.html">Songs</a>
+    </div>
+    <div class="right-buttons">
       <a id="artists-top" href="artists.html">Artists</a>
     </div>
-    <a id="songs-top" class="center-btn" href="songs.html">Songs</a>
-    <div></div> <!-- empty right column for grid symmetry -->
   </div>
 
   <div class="card" role="main">
