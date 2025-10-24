@@ -1,260 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>8 Bit Entertainment | ENGINEERS</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#000000;
-  --fg:#ffffff;
-  --muted:#b3b3cc;
-  --card-color:rgba(26,26,64,0.25);
-  --card-glow:0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
-  --retro-font: 'Press Start 2P', cursive;
-}
-
-/* Global cursor: League of Legends Pointer */
-* {
-  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
-}
-
-html, body {
-  margin:0;
-  min-height:100vh;
-  font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('pixel.gif') center/cover no-repeat fixed;
-  color:var(--fg);
-  display:flex;
-  flex-direction:column;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 2rem;
-  background: rgba(0,0,0,0.25);
-  box-sizing: border-box;
-  z-index: 10;
-  border-bottom: 1px solid var(--fg);
-  flex-wrap: wrap;
-  backdrop-filter: blur(10px);
-}
-
-.top-bar-title-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 600px;
-  text-align: left;
-}
-
-.top-bar-title {
-  font-family: var(--retro-font);
-  font-size: 2.5rem;
-  color: var(--fg);
-  animation: retro-flicker 1.5s infinite;
-  margin: 0;
-}
-
-.nav-left, .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.nav-right a, .nav-left a {
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1rem;
-  border: 2px solid var(--fg);
-  padding: 0.75rem 1.5rem;
-  background: var(--card-color);
-  font-family: var(--retro-font);
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-.nav-right a:hover, .nav-left a:hover,
-.nav-right a.active, .nav-left a.active {
-  background: var(--fg);
-  color: var(--bg);
-  box-shadow: var(--card-glow);
-}
-
-.nav-right a.active {
-  animation: none;
-}
-
-#page-wrapper{
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 0.2rem;
-  width: 100%;
-}
-
-.engineers-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7rem 20rem;
-  width: 95%;
-  padding-bottom: 4rem;
-  margin-top: 5rem;
-}
-
-.engineer-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 500px;
-  flex: 0 0 auto;
-}
-
-.engineer-item {
-  width: 100%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--card-color);
-  border: 3px dashed #fff;
-  border-radius: 0;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.engineer-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
-}
-
-.engineer-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--card-glow);
-}
-
-.engineer-name {
-  margin-top: 1rem;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1.6;
-  color: var(--muted);
-}
-
-footer{
-  width:100%;
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:auto;
-  padding-bottom: 1rem;
-}
-
-.logo-btn img {
-  max-height: 95px;
-  width: auto;
-  display: block;
-  animation: pulse 2s infinite ease-in-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-btn img:hover {
-  animation-play-state: paused;
-  transform: scale(1.1);
-  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-@keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
-    text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70;
-  }
-  20%, 24%, 55% {
-    text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70;
-  }
-}
-
-@media (max-width: 800px) {
-  .top-bar { flex-direction: column; align-items: center; gap: 0.5rem; }
-  .top-bar-title-container { position: static; transform: none; max-width: 100%; text-align: center; }
-  .top-bar-title { font-size: 1.4rem; }
-  .engineer-card { max-width: 350px; }
-}
-
-@media (max-width: 600px) {
-  .engineer-card { max-width: 250px; }
-  .top-bar-title { font-size:1.2rem; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Engineers | 8-Bit Entertainment</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="page-wrapper">
-
-  <div class="top-bar">
-    <div class="nav-left">
-      <div class="top-bar-title">ENGINEERS</div>
-    </div>
-
-    <div class="top-bar-title-container">
-      <a href="index.html" class="logo-btn">
-        <img src="logo.png" alt="Logo">
-      </a>
-    </div>
-
-    <div class="nav-right">
-      <a href="engineers.html" class="active">Engineers</a>
+  <header>
+    <img src="logo.png" alt="8 Bit Entertainment Logo">
+    <nav>
+      <a href="index.html">Home</a>
       <a href="artists.html">Artists</a>
+      <a href="engineers.html">Engineers</a>
       <a href="songs.html">Songs</a>
-    </div>
-  </div>
+    </nav>
+  </header>
 
-  <div class="engineers-container">
-    <div class="engineer-card">
-      <div class="engineer-item">
-        <img src="engineer1.jpg" alt="Engineer 1">
+  <main>
+    <h1>Engineers</h1>
+    <div class="grid">
+      <div class="card">
+        <img src="engineer1.jpg" alt="ASTRO">
+        <span>ASTRO</span>
       </div>
-      <div class="engineer-name">ASTRO<br>Engineer</div>
-    </div>
-
-    <div class="engineer-card">
-      <div class="engineer-item">
-        <img src="engineer2.jpg" alt="Engineer 2">
+      <div class="card">
+        <img src="engineer2.jpg" alt="SeektheLooper">
+        <span>SeektheLooper</span>
       </div>
-      <div class="engineer-name">SeektheLooper<br>Engineer</div>
-    </div>
-
-    <div class="engineer-card">
-      <div class="engineer-item">
-        <img src="engineer3.jpg" alt="Engineer 3">
+      <div class="card">
+        <img src="engineer3.jpg" alt="Tiri">
+        <span>Tiri</span>
       </div>
-      <div class="engineer-name">Tiri<br>Engineer</div>
     </div>
-  </div>
+  </main>
 
-  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
-</div>
-
-<!-- Optional cursor preview link -->
-<a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
-  <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
-</a>
-
+  <footer>© 2025 8-Bit Entertainment. All rights reserved.</footer>
 </body>
 </html>
