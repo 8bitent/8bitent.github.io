@@ -1,36 +1,381 @@
+
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>8-Bit Entertainment</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>8 Bit Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000000;
+  --fg:#ffffff;
+  --muted:#b3b3cc;
+  --accent1:#1a1a40;
+  --accent2:#3b1c70;
+  --accent3:#1b1b2f;
+  --card-color:rgba(26,26,64,0.25);
+  --card-glow:0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
+  --retro-font: 'Press Start 2P', cursive;
+}
+
+/* Global cursor */
+* {
+  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
+}
+
+html, body {
+  margin:0;
+  height:100%;
+  overflow:hidden;
+  font-family:var(--retro-font);
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)),
+              url('pixel.gif') center/cover no-repeat;
+  color:var(--fg);
+  display:block;
+  image-rendering: pixelated;
+}
+
+#page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===== TOP BAR ===== */
+.top-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  align-items: center;
+  padding: 1rem 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.25);
+  z-index: 10;
+}
+
+.top-bar .left-buttons,
+.top-bar .center-btn,
+.top-bar .right-buttons {
+  display: flex;
+  justify-content: center; /* center buttons in their column */
+  gap: 1rem;
+}
+
+.top-bar a{
+  color:var(--fg);
+  text-decoration:none;
+  font-weight:bold;
+  border:2px solid var(--fg);
+  padding:0.75rem 1.5rem;
+  background:var(--card-color);
+  font-family:var(--retro-font);
+  font-size:1rem;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.top-bar a:hover, .top-bar a.active{
+  background:var(--fg);
+  color:var(--bg);
+  box-shadow: var(--card-glow);
+}
+
+/* ===== CARD ===== */
+.card {
+  max-width: 760px;
+  width: 90%;
+  background: var(--card-color);
+  border-radius: 20px;
+  backdrop-filter: blur(6px);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+  max-height: calc(100vh - 9rem);
+  margin: 0;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+img.logo{
+  width:350px;
+  margin-bottom:1.5rem;
+  filter:drop-shadow(0 0 12px #3b1c70);
+  animation: logo-float 4s ease-in-out infinite;
+}
+
+@keyframes logo-float{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-3px);}
+}
+
+h1{
+  margin:0 0 .75rem 0;
+  font-size:clamp(28px,6vw,56px);
+  color:var(--fg);
+  text-shadow:0 0 10px #3b1c70;
+  animation: retro-flicker 1.5s infinite;
+  text-align: center;
+}
+
+p{
+  margin:.25rem 0 1rem 0;
+  color:var(--muted);
+  font-size:clamp(14px,2.5vw,18px);
+  text-align: center;
+}
+
+#mission-btn{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  padding:0.6rem 1.2rem;
+  border:2px solid var(--fg);
+  background:var(--card-color);
+  color:var(--fg);
+  font-family:var(--retro-font);
+  font-weight:bold;
+  z-index:10;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+#mission-btn:hover, #mission-btn.active{
+  background:var(--fg);
+  color:var(--bg);
+  box-shadow: var(--card-glow);
+}
+
+.links a{
+  color:var(--fg);
+  text-decoration:none;
+  margin:0 .75rem;
+  padding:0.5rem 1rem;
+  border:2px solid var(--fg);
+  background:var(--card-color);
+  font-family:var(--retro-font);
+  font-size:14px;
+  font-weight:bold;
+  display:inline-block;
+  transition: all 0.3s ease, box-shadow 0.3s ease;
+}
+
+.links a:hover, .links a.active{
+  background:var(--fg);
+  color:var(--bg);
+  box-shadow: var(--card-glow);
+}
+
+#email{
+  margin-top:0.75rem;
+  color:var(--fg);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+
+#email.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.content-stack {
+  position:relative;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+}
+
+.card-content {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:100%;
+  transition:opacity 0.5s ease;
+  z-index:1;
+}
+
+.card-content.hidden { opacity:0; pointer-events:none; }
+
+.mission-text {
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:opacity 0.5s ease;
+  color:var(--fg);
+  text-align:center;
+  line-height:1.5;
+  font-size:clamp(14px,1.5vw,18px);
+  z-index:2;
+  white-space: normal;
+  word-wrap:break-word;
+  overflow: hidden;
+  animation: arcade-fade 0.5s ease-in-out forwards;
+}
+
+.mission-text.visible{ opacity:1; animation: arcade-fade 0.5s ease-in-out; }
+
+@keyframes arcade-fade{
+  0%{opacity:0; transform:scale(0.95);}
+  50%{opacity:1; transform:scale(1.02);}
+  100%{opacity:1; transform:scale(1);}
+}
+
+@keyframes retro-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff,0 0 8px #3b1c70,0 0 12px #3b1c70; }
+  20%, 24%, 55% { text-shadow:0 0 2px #fff,0 0 4px #3b1c70,0 0 6px #3b1c70; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; text-shadow: 0 0 6px #fff, 0 0 12px #3b1c70; }
+  50% { opacity: 0.8; text-shadow: 0 0 4px #fff, 0 0 8px #3b1c70; }
+}
+
+footer{
+  position: fixed;
+  bottom: 1rem;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 12px;
+  color: var(--muted);
+  z-index: 10;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .top-bar {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: center;
+    gap: 0.5rem;
+    padding-top: calc(0.5rem + env(safe-area-inset-top));
+  }
+
+  .top-bar a:nth-child(3) {
+    grid-column: 1 / -1; /* last button on its own row */
+  }
+
+  .top-bar a {
+    flex: 0 0 auto;
+    min-width: 80px;
+    font-size: 12px;
+    padding: 0.4rem 0.8rem;
+  }
+}
+</style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="8 Bit Entertainment Logo">
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="artists.html">Artists</a>
-      <a href="engineers.html">Engineers</a>
-      <a href="songs.html">Songs</a>
-    </nav>
-  </header>
-
-  <main>
-    <h1>8-Bit Entertainment</h1>
-    <p>
-      Mixing emotion and distortion, we engineer the imperfections that make music real.<br><br>
-      8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic.
-      We embrace the “low quality” that speaks to the soul, the rhythm that connects culture
-      and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.
-    </p>
-    <div class="links">
-      <a href="https://www.instagram.com/8.bit_ent/" target="_blank">Instagram</a>
-      <a href="mailto:eightbit.ent@gmail.com">Email</a>
+<div id="page-wrapper">
+  <div class="top-bar">
+    <div class="left-buttons">
+      <a id="engineers-top" href="engineers.html">Engineers</a>
     </div>
-  </main>
+    <div class="center-btn">
+      <a id="songs-top" href="songs.html">Songs</a>
+    </div>
+    <div class="right-buttons">
+      <a id="artists-top" href="artists.html">Artists</a>
+    </div>
+  </div>
 
-  <footer>© 2025 8-Bit Entertainment. All rights reserved.</footer>
+  <div class="card" role="main">
+    <button id="mission-btn">Mission</button>
+    <img src="logo.png" alt="8 Bit Entertainment logo" class="logo">
+    <div class="content-stack">
+      <div class="card-content">
+        <h1>8 Bit Entertainment</h1>
+        <p>Mixing emotion and distortion, we engineer the imperfections that make music real.</p>
+        <div class="links">
+          <a href="https://www.instagram.com/8.bit_ent/" target="_blank" rel="noopener">Instagram</a>
+          <a id="contact-link">Contact</a>
+        </div>
+        <div id="email">eightbit.ent@gmail.com</div>
+      </div>
+      <div class="mission-text"> </div>
+    </div>
+  </div>
+
+  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
+</div>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const contactLink = document.getElementById('contact-link');
+  const emailDiv = document.getElementById('email');
+  const missionBtn = document.getElementById('mission-btn');
+  const cardContent = document.querySelector('.card-content');
+  const missionText = document.querySelector('.mission-text');
+  let missionVisible = false;
+  let typingTimeout = null;
+
+  contactLink.addEventListener('click', () => {
+    emailDiv.classList.toggle('visible');
+  });
+
+  function typeMission(text, speed = 50) {
+    missionText.textContent = '';
+    missionText.style.opacity = 1;
+    missionText.style.whiteSpace = 'pre-wrap';
+    missionText.style.overflow = 'hidden';
+    missionText.style.animation = '';
+
+    let i = 0;
+    function type() {
+      if (!missionVisible) return;
+      if (i < text.length) {
+        missionText.textContent += text[i];
+        i++;
+        typingTimeout = setTimeout(type, speed);
+      } else {
+        missionText.style.animation = 'pulse 1.5s infinite';
+      }
+    }
+    type();
+  }
+
+  missionBtn.addEventListener('click', () => {
+    missionVisible = !missionVisible;
+    clearTimeout(typingTimeout);
+
+    if(missionVisible){
+      cardContent.classList.add('hidden');
+      missionText.classList.add('visible');
+      missionBtn.classList.add('active');
+      typeMission("8-Bit Entertainment celebrates the raw, the pixelated, and the unapologetically authentic. We embrace the “low quality” that speaks to the soul, the rhythm that connects culture and consciousness, and the sounds that move us beyond perfection. Here, music isn’t judged—it’s felt.", 20);
+    } else {
+      cardContent.classList.remove('hidden');
+      missionText.classList.remove('visible');
+      missionBtn.classList.remove('active');
+      missionText.style.animation = '';
+      missionText.style.opacity = '';
+      missionText.textContent = '';
+      missionText.style.whiteSpace = 'nowrap';
+      missionText.style.overflow = 'hidden';
+    }
+  });
+});
+</script>
 </body>
 </html>
