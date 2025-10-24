@@ -1,356 +1,40 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>8 Bit Entertainment | SONGS</title>
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#000000;
-  --fg:#ffffff;
-  --muted:#b3b3cc;
-  --card-color:rgba(26,26,64,0.25);
-  --card-glow:0 0 12px rgba(26,26,64,0.5),0 0 24px rgba(26,26,64,0.5);
-  --retro-font: 'Press Start 2P', cursive;
-}
-
-/* Global cursor: League of Legends Pointer */
-* {
-  cursor: url('https://cur.cursors-4u.net/games/gam-14/gam1340.cur'), auto !important;
-}
-
-html, body {
-  margin:0;
-  min-height:100vh;
-  font-family:var(--retro-font);
-  background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('pixel.gif') center/cover no-repeat fixed;
-  color:var(--fg);
-  display:flex;
-  flex-direction:column;
-}
-
-.top-bar {
-  position: sticky;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 2rem;
-  background: rgba(0,0,0,0.25);
-  box-sizing: border-box;
-  z-index: 10;
-  border-bottom: 1px solid var(--fg);
-  flex-wrap: wrap;
-  backdrop-filter: blur(10px);
-}
-
-.top-bar-title-container {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  max-width: 600px;
-  text-align: left;
-}
-
-.top-bar-title {
-  font-family: var(--retro-font);
-  font-size: 2.5rem;
-  color: var(--fg);
-  animation: retro-flicker 1.5s infinite;
-  margin: 0;
-}
-
-.nav-left, .nav-right {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-}
-
-.nav-right a, .nav-left a {
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: bold;
-  border: 2px solid var(--fg);
-  padding: 0.75rem 1.5rem;
-  background: var(--card-color);
-  font-family: var(--retro-font);
-  font-size: 1rem;
-  transition: all 0.3s ease, box-shadow 0.3s ease;
-}
-
-.nav-right a:hover, .nav-left a:hover,
-.nav-right a.active, .nav-left a.active {
-  background: var(--fg);
-  color: var(--bg);
-  box-shadow: var(--card-glow);
-}
-
-.nav-right a.active {
-  animation: none;
-}
-
-#page-wrapper{
-  flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 0.2rem;
-  width: 100%;
-}
-
-.songs-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 7rem 20rem;
-  width: 95%;
-  padding-bottom: 4rem;
-  margin-top: 5rem;
-}
-
-.song-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 500px;
-}
-
-.song-item {
-  width: 100%;
-  aspect-ratio: 1/1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--card-color);
-  border: 3px dashed #fff;
-  border-radius: 0; /* keep it sharp */
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.song-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
-}
-
-.song-item:hover {
-  transform: scale(1.05);
-  box-shadow: var(--card-glow);
-}
-
-.song-title {
-  margin-top: 1rem;
-  font-size: 1rem;
-  text-align: center;
-  line-height: 1.6;
-}
-
-.song-title a {
-  color: #ff6666;
-  text-decoration: none;
-}
-
-.song-title a:hover {
-  text-decoration: underline;
-}
-
-.lightbox{
-  position:fixed;
-  top:0; left:0;
-  width:100%; height:100%;
-  background:rgba(0,0,0,0.85);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:50;
-  opacity:0;
-  visibility:hidden;
-  transition:opacity 0.3s ease;
-  padding:1rem;
-  box-sizing:border-box;
-}
-
-.lightbox.active{
-  opacity:1;
-  visibility:visible;
-}
-
-.video-wrapper {
-  width: 100%;
-  max-width: 600px;
-  aspect-ratio: 1/1;
-}
-
-.lightbox video{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  border: 3px dashed #fff;
-  border-radius: 0; /* keep it sharp */
-  box-shadow: 0 0 12px rgba(26,26,64,0.5), 0 0 24px rgba(26,26,64,0.5);
-}
-
-.lightbox .close-btn{
-  position:absolute;
-  top:1rem;
-  right:1rem;
-  font-size:2rem;
-  color:var(--fg);
-  background:transparent;
-  border:none;
-}
-
-footer{
-  width:100%;
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:auto;
-  padding-bottom: 1rem;
-}
-
-.logo-btn img {
-  max-height: 95px;
-  width: auto;
-  display: block;
-  animation: pulse 2s infinite ease-in-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo-btn img:hover {
-  animation-play-state: paused;
-  transform: scale(1.1);
-  box-shadow: 0 0 8px #fff, 0 0 16px #3b1c70, 0 0 24px #3b1c70;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-}
-
-@keyframes retro-flicker {
-  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { text-shadow:0 0 4px #fff, 0 0 8px #3b1c70, 0 0 12px #3b1c70; }
-  20%, 24%, 55% { text-shadow:0 0 2px #fff, 0 0 4px #3b1c70, 0 0 6px #3b1c70; }
-}
-
-@media (max-width: 800px) {
-  .top-bar { flex-direction: column; align-items: center; gap: 0.5rem; }
-  .top-bar-title-container { position: static; transform: none; max-width: 100%; text-align: center; }
-  .top-bar-title { font-size: 1.4rem; }
-  .lightbox video { max-width: 90%; max-height: 90%; }
-  .song-card { max-width: 350px; }
-}
-
-@media (max-width: 600px) {
-  .song-card { max-width: 250px; }
-  .top-bar-title { font-size:1.2rem; }
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Songs | 8-Bit Entertainment</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-<div id="page-wrapper">
-
-  <div class="top-bar">
-    <div class="nav-left">
-      <div class="top-bar-title">SONGS</div>
-    </div>
-
-    <div class="top-bar-title-container">
-      <a href="index.html" class="logo-btn">
-        <img src="logo.png" alt="Logo">
-      </a>
-    </div>
-
-    <div class="nav-right">
-      <a href="engineers.html">Engineers</a>
+  <header>
+    <img src="logo.png" alt="8 Bit Entertainment Logo">
+    <nav>
+      <a href="index.html">Home</a>
       <a href="artists.html">Artists</a>
-      <a href="songs.html" class="active">Songs</a>
-    </div>
-  </div>
+      <a href="engineers.html">Engineers</a>
+      <a href="songs.html">Songs</a>
+    </nav>
+  </header>
 
-  <div class="songs-container">
-    <div class="song-card">
-      <div class="song-item" data-video="Video.mp4">
-        <img src="cover1.jpg" alt="Song 1">
+  <main>
+    <h1>Songs</h1>
+    <div class="grid">
+      <div class="card">
+        <img src="cover1.jpg" alt="Tiri - Jaila Busy Time">
+        <span><a href="https://www.youtube.com/watch?v=LRCyn03um3o" target="_blank">Tiri – Jaila Busy Time</a></span>
       </div>
-      <div class="song-title">
-        Tiri - Jaila Busy Time<br>
-        <a href="https://www.youtube.com/watch?v=LRCyn03um3o" target="_blank">Stream</a>
+      <div class="card">
+        <img src="cover2.jpg" alt="SeektheLooper - Emotions">
+        <span><a href="https://www.youtube.com/watch?v=jCxLDvkrPbI" target="_blank">SeektheLooper – Emotions</a></span>
       </div>
-    </div>
-
-    <div class="song-card">
-      <div class="song-item" data-video="Emotions.mp4">
-        <img src="cover2.jpg" alt="Song 2">
-      </div>
-      <div class="song-title">
-        SeektheLooper - Emotions<br>
-        <a href="https://www.youtube.com/watch?v=jCxLDvkrPbI" target="_blank">Stream</a>
+      <div class="card">
+        <img src="cover4.jpg" alt="SeektheLooper - Million Things">
+        <span><a href="https://www.youtube.com/watch?v=7rCN0ODEQe8" target="_blank">SeektheLooper – Million Things</a></span>
       </div>
     </div>
+  </main>
 
-    <div class="song-card">
-      <div class="song-item" data-video="Million.mp4">
-        <img src="cover4.jpg" alt="Song 3">
-      </div>
-      <div class="song-title">
-        SeektheLooper - Million Things<br>
-        <a href="https://www.youtube.com/watch?v=7rCN0ODEQe8" target="_blank">Stream</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="lightbox" id="lightbox">
-    <button class="close-btn" id="close-lightbox">&times;</button>
-    <div class="video-wrapper">
-      <video id="lightbox-video" controls autoplay controlsList="nofullscreen"></video>
-    </div>
-  </div>
-
-  <footer>© 2025 8 Bit Entertainment. All rights reserved.</footer>
-</div>
-
-<!-- Optional cursor preview link -->
-<a href="https://www.cursors-4u.com/cursor/2011/11/05/league-of-legends-pointer.html" target="_blank" title="League Of Legends Pointer">
-  <img src="https://cur.cursors-4u.net/cursor.png" border="0" alt="League Of Legends Pointer" style="position:absolute; top: 0px; right: 0px;" />
-</a>
-
-<script>
-const songItems = document.querySelectorAll('.song-item');
-const lightbox = document.getElementById('lightbox');
-const video = document.getElementById('lightbox-video');
-const closeBtn = document.getElementById('close-lightbox');
-
-songItems.forEach(item => {
-  item.addEventListener('click', () => {
-    const src = item.getAttribute('data-video');
-    video.src = src;
-    video.volume = 0.5;
-    video.play();
-    lightbox.classList.add('active');
-  });
-});
-
-closeBtn.addEventListener('click', () => {
-  video.pause();
-  video.currentTime = 0;
-  lightbox.classList.remove('active');
-});
-
-lightbox.addEventListener('click', e => {
-  if(e.target === lightbox){
-    video.pause();
-    video.currentTime = 0;
-    lightbox.classList.remove('active');
-  }
-});
-</script>
+  <footer>© 2025 8-Bit Entertainment. All rights reserved.</footer>
 </body>
 </html>
